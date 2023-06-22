@@ -23,7 +23,7 @@ export default function DropdownSection() {
         }}
         sx={{ width: 300, marginTop: "16px" }}
         autoCapitalize="true"
-        renderInput={(params) => <TextField {...params} label="crop" />}
+        renderInput={(params) => <TextField {...params} label="Crop" />}
       />
       <div style={{ display: "flex", width: "100%", gap: "15px" }}>
         {inputValue &&
