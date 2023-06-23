@@ -29,9 +29,19 @@ const OneBlock = (props) => {
   }, []);
 
   return (
-    <div style={{ position: "relative", width: rectwidth }}>
+    <div
+      style={{
+        position: "relative",
+        width: rectwidth,
+        marginTop: "16px",
+
+        maxWidth: "80vw",
+      }}
+    >
       <div style={{ position: "relative", marginBottom: "15px" }}>
-        <p style={{ margin: "0", textAlign: "center" }}>{"150"}m</p>
+        <p style={{ margin: "0", textAlign: "center" }}>
+          {Number(rectwidth).toFixed(2)}m
+        </p>
         <div style={{ display: "flex" }}>
           <span
             style={{ width: "2px", backgroundColor: "black", height: "10px" }}
@@ -50,7 +60,7 @@ const OneBlock = (props) => {
         </div>
       </div>
       <canvas
-        width={rectwidth + 50}
+        width={rectwidth}
         height={rectheight}
         ref={canvasRef}
         {...props}
@@ -60,12 +70,12 @@ const OneBlock = (props) => {
           position: "absolute",
           height: rectheight,
           rotate: "90deg",
-          top: "1px",
-          paddingTop: "85px",
+          top: `-${0.14444444444 * rectheight}px`,
+          paddingTop: `${0.5 * rectheight}px`,
         }}
       >
         <p style={{ margin: "0", textAlign: "center", width: rectheight }}>
-          {"150"}m
+          {rectheight}m
         </p>
         <div style={{ display: "flex", width: rectheight }}>
           <span

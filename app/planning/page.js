@@ -9,14 +9,18 @@ import { useState } from "react";
 
 export default function Planning() {
   const [inputValue, setInputValue] = useState("");
-  const [width, setWidth] = useState(1350);
-  const [height, setHeight] = useState(900);
-  const [allowed, setAllowed] = useState(20);
-  const [x, setX] = useState("");
-  const [y, setY] = useState("");
-  const [q, setQ] = useState("");
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+  const [allowed, setAllowed] = useState(0);
+  const [v, setV] = useState(0);
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+  const [q, setQ] = useState(0);
+  const [hrs, setHrs] = useState(3);
+  const [rows, setRows] = useState(2);
+  const [irrg, setIrrg] = useState(2);
   return (
-    <main>
+    <main style={{ overflowX: "hidden" }}>
       <Crop
         inputValue={inputValue}
         setInputValue={setInputValue}
@@ -35,6 +39,14 @@ export default function Planning() {
         setHeight={setHeight}
         allowed={allowed}
         setAllowed={setAllowed}
+        v={v}
+        setV={setV}
+        hrs={hrs}
+        setHrs={setHrs}
+        rows={rows}
+        setRows={setRows}
+        irrg={irrg}
+        setIrrg={setIrrg}
       />
       <Divider />
       {x && y && allowed && width && height && q && (
@@ -43,9 +55,13 @@ export default function Planning() {
           height={height}
           x={x}
           y={y}
+          v={v}
           q={q}
           allowed={allowed}
           area={Math.round((width * height) / 4200)}
+          hrs={hrs}
+          rows={rows}
+          irr={irrg}
         />
       )}
     </main>

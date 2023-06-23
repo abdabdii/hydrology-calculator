@@ -19,6 +19,9 @@ export default function InputBoxes({ x, setX, y, setY, q, setQ }) {
         id="horizontal"
         label="Horizontal space (m)"
         value={x}
+        onFocus={(event) => {
+          event.target.select();
+        }}
         onChange={(event) => {
           setX(event.target.value);
         }}
@@ -36,6 +39,9 @@ export default function InputBoxes({ x, setX, y, setY, q, setQ }) {
         id="vertical"
         label="Vertical space (m)"
         value={y}
+        onFocus={(event) => {
+          event.target.select();
+        }}
         onChange={(event) => {
           setY(event.target.value);
         }}
@@ -53,6 +59,9 @@ export default function InputBoxes({ x, setX, y, setY, q, setQ }) {
         id="flow"
         label="Max Req water (L/day)"
         value={q}
+        onFocus={(event) => {
+          event.target.select();
+        }}
         onChange={(event) => {
           setQ(event.target.value);
         }}
