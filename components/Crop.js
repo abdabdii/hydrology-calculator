@@ -9,7 +9,16 @@ import {
 import DropdownSection from "./DropdownSection";
 import InputBoxes from "./InputBoxes";
 
-export default function Crop() {
+export default function Crop({
+  inputValue,
+  setInputValue,
+  x,
+  setX,
+  y,
+  setY,
+  q,
+  setQ,
+}) {
   const [custom, setCustom] = useState("exist");
   const handleChange = (event) => {
     setCustom(event.target.value);
@@ -38,7 +47,17 @@ export default function Crop() {
             />
           </RadioGroup>
         </FormControl>
-        {custom == "exist" ? <DropdownSection /> : <InputBoxes />}
+        {custom == "exist" ? (
+          <DropdownSection
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+            setQ={setQ}
+            setX={setX}
+            setY={setY}
+          />
+        ) : (
+          <InputBoxes x={x} setX={setX} y={y} setY={setY} q={q} setQ={setQ} />
+        )}
       </div>
     </>
   );

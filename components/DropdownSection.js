@@ -4,12 +4,15 @@ import Autocomplete from "@mui/material/Autocomplete";
 import WaterDropOutlinedIcon from "@mui/icons-material/WaterDropOutlined";
 import StartOutlinedIcon from "@mui/icons-material/StartOutlined";
 import UpgradeOutlinedIcon from "@mui/icons-material/UpgradeOutlined";
-import { useState } from "react";
 import StatItem from "./StatItem";
 
-export default function DropdownSection() {
-  const [inputValue, setInputValue] = useState("");
-
+export default function DropdownSection({
+  inputValue,
+  setInputValue,
+  setX,
+  setY,
+  setQ,
+}) {
   return (
     <div style={{ width: "500px" }}>
       Select the crop
@@ -20,6 +23,11 @@ export default function DropdownSection() {
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
+          if (newInputValue == "") {
+            setQ("");
+            setX("");
+            setY("");
+          }
         }}
         sx={{ width: 300, marginTop: "16px" }}
         autoCapitalize="true"
@@ -29,28 +37,33 @@ export default function DropdownSection() {
         {inputValue &&
           fruits
             .filter((fruit) => fruit.label == inputValue)
-            .map((fruit) => (
-              <>
-                <StatItem
-                  key="horizontal"
-                  label="Horizontal space"
-                  value={`${fruit.x} m`}
-                  SelectedIcon={StartOutlinedIcon}
-                />
-                <StatItem
-                  key="vertical"
-                  label="Vertical space"
-                  value={`${fruit.y} m`}
-                  SelectedIcon={UpgradeOutlinedIcon}
-                />
-                <StatItem
-                  key="flow"
-                  label="Max Req water"
-                  value={`${fruit.q} L/day`}
-                  SelectedIcon={WaterDropOutlinedIcon}
-                />
-              </>
-            ))}
+            .map((fruit) => {
+              setQ(fruit.q);
+              setX(fruit.x);
+              setY(fruit.y);
+              return (
+                <>
+                  <StatItem
+                    key="horizontal"
+                    label="Horizontal space"
+                    value={`${fruit.x} m`}
+                    SelectedIcon={StartOutlinedIcon}
+                  />
+                  <StatItem
+                    key="vertical"
+                    label="Vertical space"
+                    value={`${fruit.y} m`}
+                    SelectedIcon={UpgradeOutlinedIcon}
+                  />
+                  <StatItem
+                    key="flow"
+                    label="Max Req water"
+                    value={`${fruit.q} L/day`}
+                    SelectedIcon={WaterDropOutlinedIcon}
+                  />
+                </>
+              );
+            })}
       </div>
     </div>
   );

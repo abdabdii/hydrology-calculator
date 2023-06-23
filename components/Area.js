@@ -2,12 +2,16 @@ import TextField from "@mui/material/TextField";
 import AspectRatioOutlinedIcon from "@mui/icons-material/AspectRatioOutlined";
 import StartOutlinedIcon from "@mui/icons-material/StartOutlined";
 import UpgradeOutlinedIcon from "@mui/icons-material/UpgradeOutlined";
-import { useState } from "react";
 import { InputAdornment } from "@mui/material";
 
-export default function Area() {
-  const [width, setWidth] = useState();
-  const [height, setHeight] = useState();
+export default function Area({
+  width,
+  setWidth,
+  height,
+  setHeight,
+  allowed,
+  setAllowed,
+}) {
   return (
     <>
       <h2 style={{ marginBottom: "32px" }}>Area Details</h2>
@@ -48,6 +52,25 @@ export default function Area() {
           variant="outlined"
           style={{ marginRight: "16px", maxWidth: "300px" }}
         />
+        <TextField
+          id="allowed"
+          label="Allowed (20 ~ 30)"
+          type="number"
+          value={allowed}
+          onChange={(event) => {
+            setAllowed(event.target.value);
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <StartOutlinedIcon />
+              </InputAdornment>
+            ),
+            inputProps: { min: 20, max: 30 },
+          }}
+          variant="outlined"
+          style={{ marginRight: "16px", width: "150px" }}
+        />
         <div style={{ display: "flex", flexDirection: "column" }}>
           {width && height ? "Area" : ""}
           <p style={{ fontWeight: 800, fontSize: "32px", marginTop: "0" }}>
@@ -58,7 +81,9 @@ export default function Area() {
             ) : (
               ""
             )}
-            {width && height ? `${Math.round(width * height)} m²` : ""}
+            {width && height
+              ? `${Math.round((width * height) / 4200)} fed`
+              : ""}
           </p>
         </div>
       </div>
