@@ -7,7 +7,10 @@ import { InputAdornment } from "@mui/material";
 
 export default function Area() {
   const [width, setWidth] = useState();
-  const [height, setHeight] = useState();
+  const [length, setLength] = useState();
+
+  const area = Math.round((width * length)/4200);
+  const areaSub = [Math.round(area/20), Math.round(area/30)];
   return (
     <>
       <h2 style={{ marginBottom: "32px" }}>Area Details</h2>
@@ -31,12 +34,12 @@ export default function Area() {
           style={{ marginRight: "16px", maxWidth: "300px" }}
         />
         <TextField
-          id="height"
-          label="Height (m)"
+          id="length"
+          label="Length (m)"
           type="number"
-          value={height}
+          value={length}
           onChange={(event) => {
-            setHeight(event.target.value);
+            setLength(event.target.value);
           }}
           InputProps={{
             startAdornment: (
@@ -48,18 +51,27 @@ export default function Area() {
           variant="outlined"
           style={{ marginRight: "16px", maxWidth: "300px" }}
         />
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {width && height ? "Area" : ""}
-          <p style={{ fontWeight: 800, fontSize: "32px", marginTop: "0" }}>
-            {width && height ? (
-              <AspectRatioOutlinedIcon
-                style={{ color: "#2196f3", marginRight: "12px" }}
-              />
-            ) : (
-              ""
-            )}
-            {width && height ? `${Math.round(width * height)} m²` : ""}
-          </p>
+        <div style={{ }}>
+          {width && length ? ( 
+            <>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div>Area</div>
+                <p style={{ fontWeight: 800, fontSize: "32px", marginTop: "0" }}>
+                  <AspectRatioOutlinedIcon style={{ color: "#2196f3", marginRight: "12px" }}/>
+                    {area} fed
+                </p>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div>Area Sub</div>
+                <p style={{ fontWeight: 800, fontSize: "32px", marginTop: "0" }}>
+                <AspectRatioOutlinedIcon style={{ color: "#2196f3", marginRight: "12px" }}/>
+                  {areaSub[0]} - {areaSub[1]} fed
+                </p>
+              </div>
+            </>
+          )
+            : ("")
+          }
         </div>
       </div>
     </>
