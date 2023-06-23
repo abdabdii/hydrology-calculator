@@ -26,7 +26,7 @@ const OneBlock = (props) => {
     }
     ctx.lineWidth = lineWidth;
     ctx.stroke();
-  }, []);
+  }, [rectwidth, rectheight, verticalspace]);
 
   return (
     <div

@@ -49,7 +49,7 @@ export default function Planning() {
         setIrrg={setIrrg}
       />
       <Divider />
-      {x && y && allowed && width && height && q && (
+      {x && y && allowed && width && height && q ? (
         <PlanningResult
           width={width}
           height={height}
@@ -63,6 +63,8 @@ export default function Planning() {
           rows={rows}
           irr={irrg}
         />
+      ) : (
+        ""
       )}
     </main>
   );

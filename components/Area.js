@@ -27,7 +27,7 @@ export default function Area({
 }) {
   return (
     <>
-      <h2 style={{ marginBottom: "32px" }}>Area Details</h2>
+      <h2 style={{ marginBottom: "32px" }}>Data input</h2>
       <div
         style={{
           display: "flex",
@@ -79,7 +79,7 @@ export default function Area({
         />
         <TextField
           id="allowed"
-          label="Allowed (20 ~ 30)"
+          label="Sub Area (20 ~ 30) Fed"
           type="number"
           value={allowed}
           onFocus={(event) => {
