@@ -1,4 +1,4 @@
-import fruits from "./Fruits.json" assert { type: "json" };
+import fruits from "./fruits.json" assert { type: "json" };
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import WaterDropOutlinedIcon from "@mui/icons-material/WaterDropOutlined";
