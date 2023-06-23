@@ -8,7 +8,7 @@ export default function Planning() {
   return (
     <main>
       <Crop />
-      <Divider />
+      <Divider />    
       <Area />
     </main>
   );

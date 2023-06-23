@@ -34,7 +34,7 @@ export default function DropdownSection() {
                 <StatItem
                   key="horizontal"
                   label="Horizontal space"
-                  value={`${fruit.x} m`}
+                  value={`${fruit.x} m`}  
                   SelectedIcon={StartOutlinedIcon}
                 />
                 <StatItem

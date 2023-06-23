@@ -19,7 +19,7 @@ export default function Crop() {
     <>
       <h2>Crop details</h2>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <FormControl style={{ marginBottom: "16px" }}>
+        <FormControl style={{ marginBottom: "16px" }} sx={{ '& div': { fdprocessedid: 'unset' } }}>
           <FormLabel id="demo-radio-buttons-group-label">
             Exist or custom
           </FormLabel>
