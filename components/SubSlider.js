@@ -24,13 +24,22 @@ const iOSBoxShadow =
 
 const marks = [
   {
-    value: 20,
+    value: 10,
   },
   {
-    value: 25,
+    value: 11,
   },
   {
-    value: 30,
+    value: 12,
+  },
+  {
+    value: 13,
+  },
+  {
+    value: 14,
+  },
+  {
+    value: 15,
   },
 ];
 const IOSSlider = styled(Slider)(({ theme }) => ({
@@ -83,18 +92,18 @@ const IOSSlider = styled(Slider)(({ theme }) => ({
   },
 }));
 
-export default function SubSlider({ setSubArea }) {
+export default function SubSlider({ setNofSubs }) {
 return (
     <Box sx={{ width: 300, display: "flex", marginTop: "15px"}}>
-        <Typography gutterBottom >Sub Area</Typography>
+        <Typography gutterBottom >Number of Subs</Typography>
         <IOSSlider
             aria-label="ios slider"
-            defaultValue={20}
+            defaultValue={10}
             marks={marks}
             valueLabelDisplay="on"
-            onChange={(event)=>{setSubArea(event.target.value)}}
-            max={30}
-            min={20}
+            onChange={(event)=>{setNofSubs(event.target.value)}}
+            max={15}
+            min={10}
             style={{marginLeft: "30px"}}
         />
     </Box>

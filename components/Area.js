@@ -11,10 +11,10 @@ import SubSlider from "./SubSlider";
 export default function Area() {
   const [width, setWidth] = useState("");
   const [length, setLength] = useState("");
-  const [subArea, setSubArea] = useState(20);
+  const [nofSubs, setNofSubs] = useState(20);
 
   const area = Math.round((width * length)/4200);
-  const noOfSubs = Math.floor(area/subArea);
+  const subArea = Number((area/nofSubs).toFixed(2));
   return (
     <>
       <h2 style={{ marginBottom: "32px" }}>Area Details</h2>
@@ -56,7 +56,7 @@ export default function Area() {
           style={{ marginRight: "16px" }}
         />
 
-        <SubSlider setSubArea={setSubArea} />
+        <SubSlider setNofSubs={setNofSubs} />
       </div>
       <>
           {width && length ? ( 
@@ -69,10 +69,10 @@ export default function Area() {
                 </p>
               </div>
               <div style={{ display: "flex", flexDirection: "column" }}>
-                <div>Number os Subs</div>
+                <div>Sub Area</div>
                 <p style={{ fontWeight: 800, fontSize: "32px", marginTop: "0" }}>
                 <FormatListNumberedIcon style={{ color: "#2196f3", marginRight: "12px" }}/>
-                  {noOfSubs} sub
+                  {subArea} fed
                 </p>
               </div>
             </div>
