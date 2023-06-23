@@ -9,8 +9,8 @@ import { useState } from "react";
 
 export default function Planning() {
   const [inputValue, setInputValue] = useState("");
-  const [width, setWidth] = useState("");
-  const [height, setHeight] = useState("");
+  const [width, setWidth] = useState(1350);
+  const [height, setHeight] = useState(900);
   const [allowed, setAllowed] = useState(20);
   const [x, setX] = useState("");
   const [y, setY] = useState("");
@@ -39,6 +39,8 @@ export default function Planning() {
       <Divider />
       {x && y && allowed && width && height && q && (
         <PlanningResult
+          width={width}
+          height={height}
           x={x}
           y={y}
           q={q}
