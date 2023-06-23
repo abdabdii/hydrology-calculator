@@ -4,13 +4,16 @@ import StartOutlinedIcon from "@mui/icons-material/StartOutlined";
 import UpgradeOutlinedIcon from "@mui/icons-material/UpgradeOutlined";
 import { useState } from "react";
 import { InputAdornment } from "@mui/material";
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import SubSlider from "./SubSlider";
 
 export default function Area() {
-  const [width, setWidth] = useState();
-  const [length, setLength] = useState();
+  const [width, setWidth] = useState("");
+  const [length, setLength] = useState("");
+  const [subArea, setSubArea] = useState(20);
 
   const area = Math.round((width * length)/4200);
-  const areaSub = [Math.round(area/20), Math.round(area/30)];
+  const noOfSubs = Math.floor(area/subArea);
   return (
     <>
       <h2 style={{ marginBottom: "32px" }}>Area Details</h2>
@@ -31,7 +34,7 @@ export default function Area() {
             ),
           }}
           variant="outlined"
-          style={{ marginRight: "16px", maxWidth: "300px" }}
+          style={{ marginRight: "16px" }}
         />
         <TextField
           id="length"
@@ -49,11 +52,14 @@ export default function Area() {
             ),
           }}
           variant="outlined"
-          style={{ marginRight: "16px", maxWidth: "300px" }}
+          style={{ marginRight: "16px" }}
         />
-        <div style={{ }}>
+
+        <SubSlider setSubArea={setSubArea} />
+      </div>
+      <>
           {width && length ? ( 
-            <>
+            <div style={{display: "flex", justifyContent: "space-around", marginTop: "60px"}}>
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <div>Area</div>
                 <p style={{ fontWeight: 800, fontSize: "32px", marginTop: "0" }}>
@@ -62,18 +68,17 @@ export default function Area() {
                 </p>
               </div>
               <div style={{ display: "flex", flexDirection: "column" }}>
-                <div>Area Sub</div>
+                <div>Number os Subs</div>
                 <p style={{ fontWeight: 800, fontSize: "32px", marginTop: "0" }}>
-                <AspectRatioOutlinedIcon style={{ color: "#2196f3", marginRight: "12px" }}/>
-                  {areaSub[0]} - {areaSub[1]} fed
+                <FormatListNumberedIcon style={{ color: "#2196f3", marginRight: "12px" }}/>
+                  {noOfSubs} fed
                 </p>
               </div>
-            </>
+            </div>
           )
             : ("")
           }
-        </div>
-      </div>
+      </>
     </>
   );
 }
