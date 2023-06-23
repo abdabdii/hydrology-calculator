@@ -7,6 +7,7 @@ import { InputAdornment } from "@mui/material";
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import SubSlider from "./SubSlider";
 
+
 export default function Area() {
   const [width, setWidth] = useState("");
   const [length, setLength] = useState("");
@@ -71,7 +72,7 @@ export default function Area() {
                 <div>Number os Subs</div>
                 <p style={{ fontWeight: 800, fontSize: "32px", marginTop: "0" }}>
                 <FormatListNumberedIcon style={{ color: "#2196f3", marginRight: "12px" }}/>
-                  {noOfSubs} fed
+                  {noOfSubs} sub
                 </p>
               </div>
             </div>
