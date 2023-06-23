@@ -12,7 +12,7 @@ export default function Planning() {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [allowed, setAllowed] = useState(0);
-  const [v, setV] = useState(0);
+  const [v, setV] = useState(1);
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [q, setQ] = useState(0);
