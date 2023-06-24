@@ -19,6 +19,10 @@ export default function Planning() {
   const [hrs, setHrs] = useState(3);
   const [rows, setRows] = useState(2);
   const [irrg, setIrrg] = useState(2);
+  const [windDir, setWindDir] = useState("horizontal");
+
+
+
   return (
     <main style={{ overflowX: "hidden" }}>
       <Crop
@@ -47,6 +51,8 @@ export default function Planning() {
         setRows={setRows}
         irrg={irrg}
         setIrrg={setIrrg}
+        windDir={windDir}
+        setWindDir={setWindDir}
       />
       <Divider />
       {x && y && allowed && width && height && q ? (
@@ -62,6 +68,7 @@ export default function Planning() {
           hrs={hrs}
           rows={rows}
           irr={irrg}
+          windDir={windDir}
         />
       ) : (
         ""

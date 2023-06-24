@@ -31,12 +31,25 @@ export default function PlanningResult({
   rows,
   irr,
   area,
+  windDir,
 }) {
   const nOfSubs = Number((area / allowed).toFixed(2));
   const widthOfSub = width / (nOfSubs / rows); // n of rows
   const hightOfSub = height / rows;
-  const treesPerRow = 2 * Math.floor((widthOfSub - 3) / x / 2);
-  const nOfLinesPerSub = Math.floor(hightOfSub / y);
+  let treesPerRow = 0;
+  let nOfLinesPerSub = 0;
+
+  if(windDir == "horizontal") {
+     treesPerRow = 2 * Math.floor((widthOfSub - 3) / x / 2);
+     nOfLinesPerSub = Math.floor(hightOfSub / y);
+
+  } else if (windDir == "verticals") {
+     treesPerRow = 2 * Math.floor((hightOfSub - 3) / x / 2);
+     nOfLinesPerSub = Math.floor(widthOfSub / y);
+  }
+
+  // const treesPerRow = 2 * Math.floor((widthOfSub - 3) / x / 2);
+  // const nOfLinesPerSub = Math.floor(hightOfSub / y);
   const nOfTrees = nOfLinesPerSub * treesPerRow;
   const qSubArea = Number(((q * nOfTrees) / 1000).toFixed(2));
   const hoursPerIrrg = hrs; //hours input
@@ -59,6 +72,16 @@ export default function PlanningResult({
       <div style={{ display: "flex", flexDirection: "column" }}>
         <h3 style={{ color: "#2196f3" }}>Two rows</h3>
         <div style={style}>
+          <StatPreview
+            label="Mainline diameter"
+            value={`${mainLineDiameter} mm`}
+            SelectedIcon={CircleOutlinedIcon}
+          />
+          <StatPreview
+            label="Hose Diameter"
+            value={`${khartoumDiamter} mm`}
+            SelectedIcon={CircleOutlinedIcon}
+          />
           <StatPreview
             label="Number of Subs"
             value={`${nOfSubs} sub`}
@@ -88,6 +111,8 @@ export default function PlanningResult({
             label="Number of working hours"
             value={`${nOfWorkingHours} hr`}
             SelectedIcon={QueryBuilderIcon}
+            limitedValue={18}
+            valueNum={nOfWorkingHours}
           />
           <StatPreview
             label="Trees per row"
@@ -103,16 +128,6 @@ export default function PlanningResult({
             label="Q per row"
             value={`${qPerRow} m³/sec`}
             SelectedIcon={WaterDropIcon}
-          />
-          <StatPreview
-            label="Mainline diameter"
-            value={`${mainLineDiameter} mm`}
-            SelectedIcon={CircleOutlinedIcon}
-          />
-          <StatPreview
-            label="Khartoum Diameter"
-            value={`${khartoumDiamter} mm`}
-            SelectedIcon={CircleOutlinedIcon}
           />
         </div>
       </div>

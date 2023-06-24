@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import AspectRatioOutlinedIcon from "@mui/icons-material/AspectRatioOutlined";
 import StartOutlinedIcon from "@mui/icons-material/StartOutlined";
@@ -8,6 +9,14 @@ import DensitySmallIcon from "@mui/icons-material/DensitySmall";
 import LooksOneOutlinedIcon from "@mui/icons-material/LooksOneOutlined";
 import StatPreview from "./StatPreview";
 import { CustomSlider } from "./CustomSlider";
+
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 
 export default function Area({
   width,
@@ -24,7 +33,14 @@ export default function Area({
   setRows,
   irrg,
   setIrrg,
+  windDir,
+  setWindDir,
 }) {
+  const handleChange = (event) => {
+    setWindDir(event.target.value);
+  };
+  // console.log(windDir)
+
   return (
     <>
       <h2 style={{ marginBottom: "32px" }}>Data input</h2>
@@ -123,7 +139,11 @@ export default function Area({
             SelectedIcon={AspectRatioOutlinedIcon}
           />
         ) : (
-          ""
+          <StatPreview
+          label="Area"
+          value= "0.0 fed"
+          SelectedIcon={AspectRatioOutlinedIcon}
+        />
         )}
       </div>
       <div
@@ -197,6 +217,23 @@ export default function Area({
           style={{ marginRight: "16px", maxWidth: "300px" }}
         />
       </div>
+        
+      <FormControl style={{ marginLeft: "41%"}}>
+        <FormLabel id="demo-row-radio-buttons-group-label">Wind Direction</FormLabel>
+        <RadioGroup
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+          defaultValue="horizontal"
+          value={windDir}
+          onChange={handleChange}
+        >
+          <FormControlLabel value="horizontal" control={<Radio />} label="Horizontal" />
+          <FormControlLabel value="verticals" control={<Radio />} label="Verticals" />
+        </RadioGroup>
+      </FormControl>
+
+
     </>
   );
 }
