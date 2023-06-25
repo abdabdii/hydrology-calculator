@@ -3,49 +3,6 @@ import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 
-// import {
-//   AppBar,
-//   Toolbar,
-//   Typography,
-//   Drawer,
-//   List,
-//   ListItem,
-//   ListItemIcon,
-//   ListItemText,
-// } from "@mui/material";
-import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
-const drawerWidth = 240;
-const styles = {
-  root: {
-    display: "flex",
-  },
-  appBar: {
-    height: 64,
-    zIndex: 2,
-    backgroundColor: "gray",
-    paddingLeft: "150px",
-    textTransform: "uppercase",
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    backgroundColor: "#2196f3",
-    padding: "20px",
-  },
-  drawerContainer: {
-    overflow: "auto",
-    backgroundColor: "#2196f3",
-  },
-  content: {
-    flexGrow: 1,
-    padding: "20px",
-    marginLeft: "-95px",
-  },
-};
-
 import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -64,9 +21,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
 
+const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -204,58 +161,11 @@ export default function RootLayout({ children }) {
           </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <main >
+          <main>
               <div>{children}</div>
           </main>
         </Box>
     </Box>
-
-         {/* <div style={styles.root}>
-          <AppBar position="fixed" style={styles.appBar}>
-            <Toolbar>
-              <Typography variant="h6" noWrap>
-                {pathname.slice(1)}
-              </Typography>
-            </Toolbar>
-          </AppBar>
-           <Drawer
-            style={styles.drawer}
-            variant="permanent"
-            classes={{
-              paper: styles.drawerPaper,
-            }}
-            sx={{
-              "& .MuiPaper-elevation": {
-                backgroundColor: "#2196f3",
-                paddingTop: "32px",
-                width: "150px",
-              },
-            }}
-          >
-            <Toolbar />
-            <div style={styles.drawerContainer}>
-              <List style={{ color: "white", textTransform: "uppercase" }}>
-                <ListItem
-                  button
-                  style={{
-                    color: "white",
-                    backgroundColor:
-                      pathname == "/planning" ? "rgba(0, 0, 0, 0.30)" : "",
-                  }}
-                >
-                  <ListItemIcon style={{ minWidth: "34px" }}>
-                    <AppRegistrationOutlinedIcon style={{ color: "white" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="planning" />
-                </ListItem>
-              </List>
-            </div>
-          </Drawer>
-          <main style={styles.content}>
-            <Toolbar />
-            <div>{children}</div>
-          </main>
-        </div> */}
       </body>
     </html>
   );

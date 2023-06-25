@@ -17,14 +17,19 @@ import StatPreview from "./StatPreview";
 import ForestIcon from "@mui/icons-material/Forest";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
+import { Divider } from "@mui/material";
 
 const style = {
+  // display: "grid",
+  // gridTemplateColumns: "repeat(3, 1fr)",
+  // gridTemplateRows: "repeat(3, auto)",
+  // gap: "40px",
+  // gridRowGap: "30px",
+  // marginLeft: "80px",
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
-  gridTemplateRows: "repeat(3, auto)",
-  gap: "40px",
-  gridRowGap: "30px",
-  marginLeft: "80px",
+  gridTemplateColumns: "repeat(2, 1fr)",
+  gridTemplateRows: "auto",
+  gridGap: "10px",
 };
 
 export default function Crop({
@@ -55,45 +60,34 @@ export default function Crop({
   }, [palmLength, setPalmQ]);
 
   return (
-    <>
+    <div>
       <h2>Crop details</h2>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={palm}
-                onChange={(event) => {
-                  setPalm(event.target.checked);
-                  if (!event.target.checked) {
-                    setPalmLength(0);
-                  }
-                }}
-              />
-            }
-            label="Palm trees"
-          />
-        </FormGroup>
-        <FormControl style={{ marginBottom: "16px" }}>
+      <div style={{  display: "grid", gridTemplateColumns: "1fr 1fr", gridGap: "10px"}}>
+        {/* CROP */}
+        <div style={{border: "10px", padding: "10px"}}>
+          {/* Exit or Costom */}
+          <FormControl style={{ marginBottom: "16px" }}>
           <FormLabel id="demo-radio-buttons-group-label">
             Exist or custom
           </FormLabel>
-          <RadioGroup
+            <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
             defaultValue="exist"
             name="radio-buttons-group"
             value={custom}
             onChange={handleChange}
-          >
+            >
             <FormControlLabel value="exist" control={<Radio />} label="Exist" />
             <FormControlLabel
               value="custom"
               control={<Radio />}
               label="Custom"
             />
-          </RadioGroup>
-        </FormControl>
-        {custom == "exist" ? (
+            </RadioGroup>
+          </FormControl>
+
+         {/* Crop details */}
+          {custom == "exist" ? (
           <DropdownSection
             inputValue={inputValue}
             setInputValue={setInputValue}
@@ -101,68 +95,99 @@ export default function Crop({
             setX={setX}
             setY={setY}
           />
-        ) : (
-          <InputBoxes x={x} setX={setX} y={y} setY={setY} q={q} setQ={setQ} />
-        )}
-      </div>
-      {palm && v && (
-        <div
-          style={{
-            marginTop: "16px",
-            marginBottom: "16px",
-            display: "flex",
-            justifyContent: "space-around",
-          }}
-        >
-          <h2>Palm Input</h2>
-          <TextField
-            id="palm"
-            label="Length of palm trees per irrigation"
-            value={palmLength}
-            onFocus={(event) => {
-              event.target.select();
-            }}
-            onChange={(event) => {
-              setPalmLength(event.target.value);
-            }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <ParkOutlinedIcon />
-                </InputAdornment>
-              ),
-            }}
-            variant="outlined"
-            style={{ marginRight: "16px", maxWidth: "300px" }}
-          />
-          {palmLength && (
-            <div style={style}>
-              <StatPreview
-                label="Number of palm trees"
-                value={`${Math.floor(palmLength / 2)} tree`}
-                SelectedIcon={ForestIcon}
-              />
-              <StatPreview
-                label="Q of palm Trees"
-                value={`${palmQ} m³/day`}
-                SelectedIcon={WaterDropIcon}
-              />
-              <StatPreview
-                label="Q of palm Trees/hr"
-                value={`${Number(palmQ / 3).toFixed(2)} m³/hr`}
-                SelectedIcon={WaterDropIcon}
-              />
-              <StatPreview
-                label="Diameter of palm tree pipe"
-                value={`${Number(
-                  Math.sqrt(palmQ / (0.78539816339 * v * 60 * 60 * hrs)) * 1000
-                ).toFixed(2)} mm`}
-                SelectedIcon={CircleOutlinedIcon}
-              />
-            </div>
+          ) : (
+            <InputBoxes x={x} setX={setX} y={y} setY={setY} q={q} setQ={setQ} />
           )}
         </div>
-      )}
-    </>
+        
+        {/* PALM */}
+        <div style={{border: "1px", padding: "10px"}}>
+          {/* Palm CheckBox */}
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={palm}
+                  onChange={(event) => {
+                  setPalm(event.target.checked);
+                  if (!event.target.checked) {
+                    setPalmLength(0);
+                  }
+                  }}
+                />
+              }
+            label="Palm trees"
+            />
+          </FormGroup>
+
+          {/* Palm input and out put */}
+          <div>
+            {palm && v && (
+              <div
+                style={{
+                  marginTop: "16px",
+                  marginBottom: "16px",
+                  // display: "flex",
+                  // justifyContent: "space-around",
+                }}
+              > 
+                <div style={{display: "flex", marginBottom: "30px"}}>
+                  <h2 style={{marginRight: "35px", marginTop: "9px"}}>Palm Input</h2>
+                  <TextField
+                    id="palm"
+                    label="Length of palm trees per irrigation"
+                    value={palmLength}
+                    onFocus={(event) => {
+                      event.target.select();
+                    }}
+                    onChange={(event) => {
+                      setPalmLength(event.target.value);
+                    }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <ParkOutlinedIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    variant="outlined"
+                    style={{ marginRight: "16px", maxWidth: "300px" }}
+                  />
+                </div>
+
+                 {palmLength && (
+                    <div style={style}>
+                      <StatPreview
+                        label="Number of palm trees"
+                        value={`${Math.floor(palmLength / 2)} tree`}
+                        SelectedIcon={ForestIcon}
+                      />
+                      <StatPreview
+                        label="Q of palm Trees"
+                        value={`${palmQ} m³/day`}
+                        SelectedIcon={WaterDropIcon}
+                      />
+                      <StatPreview
+                        label="Q of palm Trees/hr"
+                        value={`${Number(palmQ / 3).toFixed(2)} m³/hr`}
+                        SelectedIcon={WaterDropIcon}
+                      />
+                      <StatPreview
+                        label="Diameter of palm tree pipe"
+                        value={`${Number(
+                          Math.sqrt(palmQ / (0.78539816339 * v * 60 * 60 * hrs)) * 1000
+                        ).toFixed(2)} mm`}
+                        SelectedIcon={CircleOutlinedIcon}
+                      />
+                    </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      
   );
 }

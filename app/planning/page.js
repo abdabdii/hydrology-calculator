@@ -19,8 +19,8 @@ export default function Planning() {
   const [hrs, setHrs] = useState(3);
   const [rows, setRows] = useState(2);
   const [irrg, setIrrg] = useState(2);
-  const [palmLength, setPalmLength] = useState(0);
-  const [palm, setPalm] = useState(false);
+  const [palmLength, setPalmLength] = useState(10);
+  const [palm, setPalm] = useState(true);
   const [palmQ, setPalmQ] = useState(0);
   const [lines, setLines] = useState([]);
   const [nOfLines, setNOfLines] = useState(0);
