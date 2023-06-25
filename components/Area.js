@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import AspectRatioOutlinedIcon from "@mui/icons-material/AspectRatioOutlined";
 import StartOutlinedIcon from "@mui/icons-material/StartOutlined";
 import UpgradeOutlinedIcon from "@mui/icons-material/UpgradeOutlined";
-import { FormGroup, InputAdornment, Typography } from "@mui/material";
+import { FormGroup, InputAdornment, MenuItem, Select, Typography } from "@mui/material";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import DensitySmallIcon from "@mui/icons-material/DensitySmall";
 import LooksOneOutlinedIcon from "@mui/icons-material/LooksOneOutlined";
@@ -301,43 +301,32 @@ export default function Area({
                   order: line.index + 1,
                 }}
               />
-              <FormGroup key={`${line.index}-group1`}>
+
+                <Select
+                labelId={`${line.index}-group1`}
+                id={`${line.index}-group1`}
+                value={lines.filter((smallLine) => smallLine.index == line.index)[0].addLength}
+                style={{ width: "300px" }}
+                onChange={(event) => {
+                  setLines((oldLines) => {
+                    let currentLine = lines.filter((smallLine) => smallLine.index == line.index)[0];
+                    let newline = {...currentLine,addLength:event.target.value}
+                    return [
+                      ...oldLines.filter(
+                        (oldLine) => oldLine.index != line.index
+                      ),
+                      newline,
+                    ]
+                  })
+                }}
+                label="Include Lines"
+              >
                 {lines.map((checkLine) => (
-                  <FormControlLabel
-                    key={`${checkLine.index}-${line.index}-checker-parent`}
-                    control={
-                      <CheckBox
-                        key={`${checkLine.index}-${line.index}-checker`}
-                        disabled={checkLine.index == line.index}
-                        value={`${checkLine.index}-${line.index}-checker`}
-                        onChange={(event) => {
-                          setLines((oldLines) => {
-                            let currentLine = {
-                              ...lines.filter(
-                                (stateLine) => stateLine.index == line.index
-                              )[0],
-                            };
-                            let valueChange = event.target.checked
-                              ? currentLine.addLength + checkLine.length
-                              : currentLine.addLength - checkLine.length;
-                            let newLine = {
-                              ...currentLine,
-                              addLength: valueChange,
-                            };
-                            return [
-                              ...oldLines.filter(
-                                (oldLine) => oldLine.index != line.index
-                              ),
-                              newLine,
-                            ];
-                          });
-                        }}
-                      />
-                    }
-                    label={`Line#${checkLine.index + 1}`}
-                  />
+                <MenuItem disabled={checkLine.index = line.index} key={`${checkLine.index}-${line.index}-select`} value={checkLine.length}>
+                {`Line# ${checkLine.index +1}`}
+              </MenuItem>
                 ))}
-              </FormGroup>
+               </Select>
             </div>
           ))}
         </div>
