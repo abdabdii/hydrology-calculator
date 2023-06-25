@@ -70,8 +70,8 @@ const OneBlock = (props) => {
           position: "absolute",
           height: rectheight,
           rotate: "90deg",
-          top: `-${0.14444444444 * rectheight}px`,
-          paddingTop: `${0.5 * rectheight}px`,
+          top: `${0.1111111111 * rectheight}px`,
+          paddingTop: `${0.5 * rectwidth}px`,
         }}
       >
         <p style={{ margin: "0", textAlign: "center", width: rectheight }}>
