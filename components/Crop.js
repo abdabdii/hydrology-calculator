@@ -27,7 +27,6 @@ const style = {
   marginLeft: "80px",
 };
 
-
 export default function Crop({
   inputValue,
   setInputValue,
@@ -63,7 +62,6 @@ export default function Crop({
           <FormControlLabel
             control={
               <Checkbox
-                defaultChecked
                 checked={palm}
                 onChange={(event) => {
                   setPalm(event.target.checked);
