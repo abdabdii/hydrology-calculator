@@ -27,6 +27,7 @@ const style = {
   marginLeft: "80px",
 };
 
+
 export default function Crop({
   inputValue,
   setInputValue,

@@ -26,6 +26,7 @@ export default function Planning() {
   const [nOfLines, setNOfLines] = useState(0);
   const [subRoad, setSubRoad] = useState(0);
   const [mainRoad, setMainRoad] = useState(0);
+  const [windDir, setWindDir] = useState("horizontal");
 
   useEffect(() => {
     let newArr = [];
@@ -34,6 +35,7 @@ export default function Planning() {
     }
     setLines(newArr);
   }, [nOfLines]);
+
   return (
     <main style={{ overflowX: "hidden" }}>
       <Crop
@@ -78,6 +80,8 @@ export default function Planning() {
         setSubRoad={setSubRoad}
         mainRoad={mainRoad}
         setMainRoad={setMainRoad}
+        windDir={windDir}
+        setWindDir={setWindDir}
       />
       <Divider />
       {x && y && allowed && width && height && q ? (
@@ -97,6 +101,7 @@ export default function Planning() {
           palmQ={palmQ}
           subRoad={subRoad}
           mainRoad={mainRoad}
+          windDir={windDir}
         />
       ) : (
         ""
