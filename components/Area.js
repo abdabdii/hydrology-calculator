@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import AspectRatioOutlinedIcon from "@mui/icons-material/AspectRatioOutlined";
 import StartOutlinedIcon from "@mui/icons-material/StartOutlined";
 import UpgradeOutlinedIcon from "@mui/icons-material/UpgradeOutlined";
-import { InputAdornment, Typography } from "@mui/material";
+import { FormGroup, InputAdornment, Typography } from "@mui/material";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import DensitySmallIcon from "@mui/icons-material/DensitySmall";
 import LooksOneOutlinedIcon from "@mui/icons-material/LooksOneOutlined";
@@ -19,6 +19,7 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import { CheckBox } from "@mui/icons-material";
 
 export default function Area({
   width,
@@ -257,48 +258,87 @@ export default function Area({
           }}
         >
           {lines.map((line) => (
-            <TextField
-              id={`${line.index}-line`}
-              key={`${line.index}-line`}
-              label={`Line #${line.index + 1} Length (m)`}
-              type="number"
-              value={
-                lines.filter((stateLine) => stateLine.index == line.index)[0]
-                  .length
-              }
-              onFocus={(event) => {
-                event.target.select();
-              }}
-              onChange={(event) => {
-                setLines((oldLines) => {
-                  let currentLine = {
-                    ...lines.filter(
-                      (stateLine) => stateLine.index == line.index
-                    )[0],
-                    length: event.target.value,
-                  };
-                  return [
-                    ...oldLines.filter(
-                      (oldLine) => oldLine.index != line.index
-                    ),
-                    currentLine,
-                  ];
-                });
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <DensitySmallIcon />
-                  </InputAdornment>
-                ),
-              }}
-              variant="outlined"
-              style={{
-                marginRight: "16px",
-                maxWidth: "300px",
-                order: line.index + 1,
-              }}
-            />
+            <div key={`${line.index}-line-div`}>
+              <TextField
+                id={`${line.index}-line`}
+                key={`${line.index}-line`}
+                label={`Line #${line.index + 1} Length (m)`}
+                type="number"
+                value={
+                  lines.filter((stateLine) => stateLine.index == line.index)[0]
+                    .length
+                }
+                onFocus={(event) => {
+                  event.target.select();
+                }}
+                onChange={(event) => {
+                  setLines((oldLines) => {
+                    let currentLine = {
+                      ...lines.filter(
+                        (stateLine) => stateLine.index == line.index
+                      )[0],
+                      length: event.target.value,
+                    };
+                    return [
+                      ...oldLines.filter(
+                        (oldLine) => oldLine.index != line.index
+                      ),
+                      currentLine,
+                    ];
+                  });
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <DensitySmallIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                variant="outlined"
+                style={{
+                  marginRight: "16px",
+                  maxWidth: "300px",
+                  order: line.index + 1,
+                }}
+              />
+              <FormGroup key={`${line.index}-group1`}>
+                {lines.map((checkLine) => (
+                  <FormControlLabel
+                    key={`${checkLine.index}-${line.index}-checker-parent`}
+                    control={
+                      <CheckBox
+                        key={`${checkLine.index}-${line.index}-checker`}
+                        disabled={checkLine.index == line.index}
+                        value={`${checkLine.index}-${line.index}-checker`}
+                        onChange={(event) => {
+                          setLines((oldLines) => {
+                            let currentLine = {
+                              ...lines.filter(
+                                (stateLine) => stateLine.index == line.index
+                              )[0],
+                            };
+                            let valueChange = event.target.checked
+                              ? currentLine.addLength + checkLine.length
+                              : currentLine.addLength - checkLine.length;
+                            let newLine = {
+                              ...currentLine,
+                              addLength: valueChange,
+                            };
+                            return [
+                              ...oldLines.filter(
+                                (oldLine) => oldLine.index != line.index
+                              ),
+                              newLine,
+                            ];
+                          });
+                        }}
+                      />
+                    }
+                    label={`Line#${checkLine.index + 1}`}
+                  />
+                ))}
+              </FormGroup>
+            </div>
           ))}
         </div>
       )}

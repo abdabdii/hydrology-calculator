@@ -31,7 +31,7 @@ export default function Planning() {
   useEffect(() => {
     let newArr = [];
     for (let i = 0; i < nOfLines; i++) {
-      newArr.push({ length: 0, index: i });
+      newArr.push({ length: 0, index: i, addLength: [] });
     }
     setLines(newArr);
   }, [nOfLines]);
