@@ -6,8 +6,10 @@ import { InputAdornment, Typography } from "@mui/material";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import DensitySmallIcon from "@mui/icons-material/DensitySmall";
 import LooksOneOutlinedIcon from "@mui/icons-material/LooksOneOutlined";
+import WidthWideOutlinedIcon from "@mui/icons-material/WidthWideOutlined";
 import StatPreview from "./StatPreview";
 import { CustomSlider } from "./CustomSlider";
+import { useEffect } from "react";
 
 export default function Area({
   width,
@@ -24,6 +26,14 @@ export default function Area({
   setRows,
   irrg,
   setIrrg,
+  lines,
+  setLines,
+  nOfLines,
+  setNOfLines,
+  subRoad,
+  setSubRoad,
+  mainRoad,
+  setMainRoad,
 }) {
   return (
     <>
@@ -190,6 +200,131 @@ export default function Area({
             startAdornment: (
               <InputAdornment position="start">
                 <LooksOneOutlinedIcon />
+              </InputAdornment>
+            ),
+          }}
+          variant="outlined"
+          style={{ marginRight: "16px", maxWidth: "300px" }}
+        />
+        <TextField
+          id="lines"
+          label="Numnber of lines to divide the sub"
+          type="number"
+          value={nOfLines}
+          onFocus={(event) => {
+            event.target.select();
+          }}
+          onChange={(event) => {
+            setNOfLines(event.target.value);
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <DensitySmallIcon />
+              </InputAdornment>
+            ),
+          }}
+          variant="outlined"
+          style={{ marginRight: "16px", maxWidth: "300px" }}
+        />
+      </div>
+      {lines.length > 0 && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            marginBottom: "30px",
+          }}
+        >
+          {lines.map((line) => (
+            <TextField
+              id={`${line.index}-line`}
+              key={`${line.index}-line`}
+              label={`Line #${line.index + 1} Length (m)`}
+              type="number"
+              value={
+                lines.filter((stateLine) => stateLine.index == line.index)[0]
+                  .length
+              }
+              onFocus={(event) => {
+                event.target.select();
+              }}
+              onChange={(event) => {
+                setLines((oldLines) => {
+                  let currentLine = {
+                    ...lines.filter(
+                      (stateLine) => stateLine.index == line.index
+                    )[0],
+                    length: event.target.value,
+                  };
+                  return [
+                    ...oldLines.filter(
+                      (oldLine) => oldLine.index != line.index
+                    ),
+                    currentLine,
+                  ];
+                });
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <DensitySmallIcon />
+                  </InputAdornment>
+                ),
+              }}
+              variant="outlined"
+              style={{
+                marginRight: "16px",
+                maxWidth: "300px",
+                order: line.index + 1,
+              }}
+            />
+          ))}
+        </div>
+      )}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          marginBottom: "30px",
+        }}
+      >
+        <TextField
+          id="mainroad"
+          label="Main Road width (m)"
+          type="number"
+          value={mainRoad}
+          onFocus={(event) => {
+            event.target.select();
+          }}
+          onChange={(event) => {
+            setMainRoad(event.target.value);
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <WidthWideOutlinedIcon />
+              </InputAdornment>
+            ),
+          }}
+          variant="outlined"
+          style={{ marginRight: "16px", maxWidth: "300px" }}
+        />
+        <TextField
+          id="subroad"
+          label="Subroad width (m)"
+          type="number"
+          value={subRoad}
+          onFocus={(event) => {
+            event.target.select();
+          }}
+          onChange={(event) => {
+            setSubRoad(event.target.value);
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <WidthWideOutlinedIcon />
               </InputAdornment>
             ),
           }}

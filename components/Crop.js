@@ -1,13 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
+  Checkbox,
   FormControl,
   FormControlLabel,
+  FormGroup,
   FormLabel,
+  InputAdornment,
   Radio,
   RadioGroup,
+  TextField,
 } from "@mui/material";
 import DropdownSection from "./DropdownSection";
 import InputBoxes from "./InputBoxes";
+import ParkOutlinedIcon from "@mui/icons-material/ParkOutlined";
+import StatPreview from "./StatPreview";
+import ForestIcon from "@mui/icons-material/Forest";
+import WaterDropIcon from "@mui/icons-material/WaterDrop";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
+
+const style = {
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateRows: "repeat(3, auto)",
+  gap: "40px",
+  gridRowGap: "30px",
+  marginLeft: "80px",
+};
 
 export default function Crop({
   inputValue,
@@ -18,16 +36,45 @@ export default function Crop({
   setY,
   q,
   setQ,
+  palm,
+  setPalm,
+  v,
+  palmLength,
+  setPalmLength,
+  palmQ,
+  setPalmQ,
+  hrs,
 }) {
   const [custom, setCustom] = useState("exist");
   const handleChange = (event) => {
     setCustom(event.target.value);
   };
 
+  useEffect(() => {
+    setPalmQ(((100 * (palmLength / 2)) / 1000).toFixed(2));
+  }, [palmLength, setPalmQ]);
+
   return (
     <>
       <h2>Crop details</h2>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                defaultChecked
+                checked={palm}
+                onChange={(event) => {
+                  setPalm(event.target.checked);
+                  if (!event.target.checked) {
+                    setPalmLength(0);
+                  }
+                }}
+              />
+            }
+            label="Palm trees"
+          />
+        </FormGroup>
         <FormControl style={{ marginBottom: "16px" }}>
           <FormLabel id="demo-radio-buttons-group-label">
             Exist or custom
@@ -59,6 +106,64 @@ export default function Crop({
           <InputBoxes x={x} setX={setX} y={y} setY={setY} q={q} setQ={setQ} />
         )}
       </div>
+      {palm && v && (
+        <div
+          style={{
+            marginTop: "16px",
+            marginBottom: "16px",
+            display: "flex",
+            justifyContent: "space-around",
+          }}
+        >
+          <h2>Palm Input</h2>
+          <TextField
+            id="palm"
+            label="Length of palm trees per irrigation"
+            value={palmLength}
+            onFocus={(event) => {
+              event.target.select();
+            }}
+            onChange={(event) => {
+              setPalmLength(event.target.value);
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <ParkOutlinedIcon />
+                </InputAdornment>
+              ),
+            }}
+            variant="outlined"
+            style={{ marginRight: "16px", maxWidth: "300px" }}
+          />
+          {palmLength && (
+            <div style={style}>
+              <StatPreview
+                label="Number of palm trees"
+                value={`${Math.floor(palmLength / 2)} tree`}
+                SelectedIcon={ForestIcon}
+              />
+              <StatPreview
+                label="Q of palm Trees"
+                value={`${palmQ} m³/day`}
+                SelectedIcon={WaterDropIcon}
+              />
+              <StatPreview
+                label="Q of palm Trees/hr"
+                value={`${Number(palmQ / 3).toFixed(2)} m³/hr`}
+                SelectedIcon={WaterDropIcon}
+              />
+              <StatPreview
+                label="Diameter of palm tree pipe"
+                value={`${Number(
+                  Math.sqrt(palmQ / (0.78539816339 * v * 60 * 60 * hrs)) * 1000
+                ).toFixed(2)} mm`}
+                SelectedIcon={CircleOutlinedIcon}
+              />
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 }

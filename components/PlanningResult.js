@@ -9,6 +9,7 @@ import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import DensitySmallIcon from "@mui/icons-material/DensitySmall";
 import GrassIcon from "@mui/icons-material/Grass";
 import OneBlock from "./OneBlock";
+import LinesResults from "./LinesResults";
 
 const style = {
   display: "grid",
@@ -31,18 +32,22 @@ export default function PlanningResult({
   rows,
   irr,
   area,
+  lines,
+  palmQ,
+  subRoad,
+  mainRoad,
 }) {
   const nOfSubs = Number((area / allowed).toFixed(2));
-  const widthOfSub = width / (nOfSubs / rows); // n of rows
-  const hightOfSub = height / rows;
-  const treesPerRow = 2 * Math.floor((widthOfSub - 3) / x / 2);
+  const widthOfSub = Number(width / (nOfSubs / rows)) - subRoad / 2; // n of rows
+  const hightOfSub = Number(height / rows) - mainRoad / 2;
+  const treesPerRow = 2 * Math.floor(widthOfSub / x / 2);
   const nOfLinesPerSub = Math.floor(hightOfSub / y);
   const nOfTrees = nOfLinesPerSub * treesPerRow;
   const qSubArea = Number(((q * nOfTrees) / 1000).toFixed(2));
   const hoursPerIrrg = hrs; //hours input
   const qSubHour = (qSubArea / hoursPerIrrg).toFixed(2);
   const subIrrgHour = irr; // subs Irrigated per hour
-  const qPump = Number((qSubHour * subIrrgHour).toFixed(2)); // n of rows
+  const qPump = Number(qSubHour * subIrrgHour + Number(palmQ / hrs)).toFixed(2); // n of rows
   const z = nOfSubs / subIrrgHour;
   const nOfWorkingHours = Number((hoursPerIrrg * z).toFixed(2));
   const qPerRow = Number((treesPerRow * q) / (1000 * 60 * 60 * hrs)).toFixed(7);
@@ -57,7 +62,7 @@ export default function PlanningResult({
     <div style={{ display: "flex", flexDirection: "column" }}>
       <h2 style={{ marginBottom: "32px" }}>Results</h2>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <h3 style={{ color: "#2196f3" }}>Two rows</h3>
+        <h3 style={{ color: "#2196f3" }}>General Results</h3>
         <div style={style}>
           <StatPreview
             label="Number of Subs"
@@ -116,9 +121,12 @@ export default function PlanningResult({
           />
         </div>
       </div>
+      {lines && lines.length > 0 && (
+        <LinesResults y={y} qPerRow={qPerRow} lines={lines} v={v} />
+      )}
       <h3 style={{ color: "#2196f3" }}>Block Dimensions</h3>
       <OneBlock
-        rectwidth={widthOfSub - 3}
+        rectwidth={widthOfSub}
         rectheight={hightOfSub}
         verticalspace={y}
       />

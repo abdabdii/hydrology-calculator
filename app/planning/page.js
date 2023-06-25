@@ -5,7 +5,7 @@ import Crop from "@/components/Crop";
 import OneBlock from "@/components/OneBlock";
 import PlanningResult from "@/components/PlanningResult";
 import { Divider } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Planning() {
   const [inputValue, setInputValue] = useState("");
@@ -19,6 +19,21 @@ export default function Planning() {
   const [hrs, setHrs] = useState(3);
   const [rows, setRows] = useState(2);
   const [irrg, setIrrg] = useState(2);
+  const [palmLength, setPalmLength] = useState(0);
+  const [palm, setPalm] = useState(false);
+  const [palmQ, setPalmQ] = useState(0);
+  const [lines, setLines] = useState([]);
+  const [nOfLines, setNOfLines] = useState(0);
+  const [subRoad, setSubRoad] = useState(0);
+  const [mainRoad, setMainRoad] = useState(0);
+
+  useEffect(() => {
+    let newArr = [];
+    for (let i = 0; i < nOfLines; i++) {
+      newArr.push({ length: 0, index: i });
+    }
+    setLines(newArr);
+  }, [nOfLines]);
   return (
     <main style={{ overflowX: "hidden" }}>
       <Crop
@@ -30,6 +45,14 @@ export default function Planning() {
         setY={setY}
         q={q}
         setQ={setQ}
+        palm={palm}
+        setPalm={setPalm}
+        palmLength={palmLength}
+        setPalmLength={setPalmLength}
+        palmQ={palmQ}
+        setPalmQ={setPalmQ}
+        v={v}
+        hrs={hrs}
       />
       <Divider />
       <Area
@@ -47,6 +70,14 @@ export default function Planning() {
         setRows={setRows}
         irrg={irrg}
         setIrrg={setIrrg}
+        lines={lines}
+        setLines={setLines}
+        nOfLines={nOfLines}
+        setNOfLines={setNOfLines}
+        subRoad={subRoad}
+        setSubRoad={setSubRoad}
+        mainRoad={mainRoad}
+        setMainRoad={setMainRoad}
       />
       <Divider />
       {x && y && allowed && width && height && q ? (
@@ -62,6 +93,10 @@ export default function Planning() {
           hrs={hrs}
           rows={rows}
           irr={irrg}
+          lines={lines}
+          palmQ={palmQ}
+          subRoad={subRoad}
+          mainRoad={mainRoad}
         />
       ) : (
         ""
