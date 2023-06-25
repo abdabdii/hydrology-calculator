@@ -20,12 +20,6 @@ import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import { Divider } from "@mui/material";
 
 const style = {
-  // display: "grid",
-  // gridTemplateColumns: "repeat(3, 1fr)",
-  // gridTemplateRows: "repeat(3, auto)",
-  // gap: "40px",
-  // gridRowGap: "30px",
-  // marginLeft: "80px",
   display: "grid",
   gridTemplateColumns: "repeat(2, 1fr)",
   gridTemplateRows: "auto",
@@ -101,7 +95,7 @@ export default function Crop({
         </div>
         
         {/* PALM */}
-        <div style={{border: "1px", padding: "10px"}}>
+        <div >
           {/* Palm CheckBox */}
           <FormGroup>
             <FormControlLabel
