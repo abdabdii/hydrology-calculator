@@ -17,10 +17,10 @@ export default function DropdownSection({
   return (
     <div style={{ width: "500px" }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Crop</InputLabel>
+        <InputLabel id="demo-simple-select-label1">Crop</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="demo-simple-select-labe1l"
+          id="demo-simple-select1"
           value={inputValue}
           style={{ width: "300px" }}
           onChange={(event) => {
@@ -29,7 +29,7 @@ export default function DropdownSection({
           label="Crop"
         >
           {fruits.map((fruit) => (
-            <MenuItem key={`${fruit.label}-select`} value={fruit.label}>
+            <MenuItem key={`${fruit.label}-select-${fruit.y}`} value={fruit.label}>
               {fruit.label}
             </MenuItem>
           ))}
@@ -46,19 +46,19 @@ export default function DropdownSection({
               return (
                 <>
                   <StatItem
-                    key="horizontal"
+                    key="horizontalkey12"
                     label="Horizontal space"
                     value={`${fruit.x} m`}
                     SelectedIcon={StartOutlinedIcon}
                   />
                   <StatItem
-                    key="vertical"
+                    key="verticalkey12"
                     label="Vertical space"
                     value={`${fruit.y} m`}
                     SelectedIcon={UpgradeOutlinedIcon}
                   />
                   <StatItem
-                    key="flow"
+                    key="flowkey12"
                     label="Max Req water"
                     value={`${fruit.q} L/day`}
                     SelectedIcon={WaterDropOutlinedIcon}

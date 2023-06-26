@@ -26,6 +26,21 @@ export default function LinesResults({ y, v, qPerRow, lines }) {
             )
             .map((line) => {
               let qLine = Number((line.length * qPerRow) / y).toFixed(7);
+              let extraValue= line.length
+              if (line.addLength&& line.addLength.length > 0) {
+                line.addLength.forEach((minLine) => {
+                const regex = /-(\d+)/;
+                const match = minLine.match(regex);
+                console.log(match);
+
+                if (match) {
+                  const number = parseInt(match[1]);
+                  extraValue = Number(extraValue) + Number(number)
+                }
+                  
+                })
+                qLine = Number((extraValue * qPerRow) / y).toFixed(4);
+              }
               let dLine = Number(
                 Math.sqrt(qLine / (0.78539816339 * v)) * (1000).toFixed(7)
               ).toFixed(2);

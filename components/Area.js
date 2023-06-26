@@ -50,6 +50,10 @@ export default function Area({
   const handleChange = (event) => {
     setWindDir(event.target.value);
   };
+  let ordersOfInput= []
+  if(nOfLines) {
+    ordersOfInput=[...Array(nOfLines).keys()]
+  }
   // console.log(windDir)
 
   return (
@@ -260,8 +264,8 @@ export default function Area({
           {lines.map((line) => (
             <div key={`${line.index}-line-div`}>
               <TextField
-                id={`${line.index}-line`}
-                key={`${line.index}-line`}
+                id={`${line.index + 6}-line-boxq`}
+                key={`${line.index + 6}-line-box`}
                 label={`Line #${line.index + 1} Length (m)`}
                 type="number"
                 value={
@@ -286,6 +290,7 @@ export default function Area({
                       currentLine,
                     ];
                   });
+
                 }}
                 InputProps={{
                   startAdornment: (
@@ -298,7 +303,7 @@ export default function Area({
                 style={{
                   marginRight: "16px",
                   maxWidth: "300px",
-                  order: line.index + 1,
+                  order:line.index + 1,
                 }}
               />
 
@@ -306,7 +311,9 @@ export default function Area({
                 labelId={`${line.index}-group1`}
                 id={`${line.index}-group1`}
                 value={lines.filter((smallLine) => smallLine.index == line.index)[0].addLength}
-                style={{ width: "300px" }}
+                multiple={true}
+                style={{ marginRight: "16px",
+                  width: "200px",marginTop:"16px" }}
                 onChange={(event) => {
                   setLines((oldLines) => {
                     let currentLine = lines.filter((smallLine) => smallLine.index == line.index)[0];
@@ -322,7 +329,7 @@ export default function Area({
                 label="Include Lines"
               >
                 {lines.map((checkLine) => (
-                <MenuItem disabled={checkLine.index = line.index} key={`${checkLine.index}-${line.index}-select`} value={checkLine.length}>
+                <MenuItem disabled={checkLine.index == line.index} key={`${checkLine.index}-${line.index}-select`} value={`${checkLine.index}-${checkLine.length}`}>
                 {`Line# ${checkLine.index +1}`}
               </MenuItem>
                 ))}

@@ -33,7 +33,7 @@ export default function Planning() {
     
     for (let i = 0; i < nOfLines; i ++) {
       let indexvalue = i
-      newArr.push({ length: 0, index: indexvalue, addLength: "" });
+      newArr.push({ length: 0, index: indexvalue, addLength: [] });
     }
     setLines(newArr);
     console.log(newArr);
