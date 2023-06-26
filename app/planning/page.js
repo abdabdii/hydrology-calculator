@@ -8,7 +8,7 @@ import { Divider } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function Planning() {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("Mango");
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
   const [allowed, setAllowed] = useState(0);

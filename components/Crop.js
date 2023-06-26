@@ -115,16 +115,7 @@ export default function Crop({
           </FormGroup>
 
           {/* Palm input and out put */}
-          <div>
-            {palm && v && (
-              <div
-                style={{
-                  marginTop: "16px",
-                  marginBottom: "16px",
-                  // display: "flex",
-                  // justifyContent: "space-around",
-                }}
-              > 
+              <div style={{ marginTop: "16px", marginBottom: "16px", opacity: palm && v ? 1 : 0, transition: "opacity 1s"}}> 
                 <div style={{display: "flex", marginBottom: "30px"}}>
                   <h2 style={{marginRight: "35px", marginTop: "9px"}}>Palm Input</h2>
                   <TextField
@@ -149,8 +140,8 @@ export default function Crop({
                   />
                 </div>
 
-                 {palmLength && (
-                    <div style={style}>
+                 {palmLength ? (
+                    <div style={{...style,  opacity: palmLength ? 1 : 0, transition: "opacity 1s"}}>
                       <StatPreview
                         label="Number of palm trees"
                         value={`${Math.floor(palmLength / 2)} tree`}
@@ -174,10 +165,8 @@ export default function Crop({
                         SelectedIcon={CircleOutlinedIcon}
                       />
                     </div>
-                )}
+                  ):""}
               </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
