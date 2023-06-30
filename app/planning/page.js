@@ -27,17 +27,20 @@ export default function Planning() {
   const [subRoad, setSubRoad] = useState(0);
   const [mainRoad, setMainRoad] = useState(0);
   const [windDir, setWindDir] = useState("horizontal");
+  const [gasLength, setGasLength] = useState(0);
+  const [gas, setGas] = useState(false);
+  const [gasQ, setGasQ] = useState(0);
 
   useEffect(() => {
     let newArr = [];
-    
-    for (let i = 0; i < nOfLines; i ++) {
-      let indexvalue = i
+
+    for (let i = 0; i < nOfLines; i++) {
+      let indexvalue = i;
       newArr.push({ length: 0, index: indexvalue, addLength: [] });
     }
     setLines(newArr);
     console.log(newArr);
-  }, [nOfLines,setLines]);
+  }, [nOfLines, setLines]);
 
   return (
     <main style={{ overflowX: "hidden" }}>
@@ -56,6 +59,12 @@ export default function Planning() {
         setPalmLength={setPalmLength}
         palmQ={palmQ}
         setPalmQ={setPalmQ}
+        gasQ={gasQ}
+        setGas={setGas}
+        gas={gas}
+        gasLength={gasLength}
+        setGasLength={setGasLength}
+        setGasQ={setGasQ}
         v={v}
         hrs={hrs}
       />
@@ -102,6 +111,7 @@ export default function Planning() {
           irr={irrg}
           lines={lines}
           palmQ={palmQ}
+          gasQ={gasQ}
           subRoad={subRoad}
           mainRoad={mainRoad}
           windDir={windDir}
