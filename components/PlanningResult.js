@@ -10,6 +10,9 @@ import DensitySmallIcon from "@mui/icons-material/DensitySmall";
 import GrassIcon from "@mui/icons-material/Grass";
 import OneBlock from "./OneBlock";
 import LinesResults from "./LinesResults";
+import Inventory from "@/components/Inventory";
+import { Divider } from "@mui/material";
+
 
 const style = {
   display: "grid",
@@ -140,6 +143,13 @@ export default function PlanningResult({
         rectwidth={widthOfSub}
         rectheight={hightOfSub}
         verticalspace={y}
+      />
+      <Divider />
+      <Inventory
+          nOfLinesPerSub={nOfLinesPerSub}
+          qPerRow={qPerRow}
+          nOfSubs={nOfSubs}
+          qCrop={q}
       />
     </div>
   );
