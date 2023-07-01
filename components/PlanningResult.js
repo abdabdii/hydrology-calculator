@@ -34,6 +34,7 @@ export default function PlanningResult({
   area,
   lines,
   palmQ,
+  gasQ,
   subRoad,
   mainRoad,
   windDir,
@@ -56,7 +57,9 @@ export default function PlanningResult({
   const hoursPerIrrg = hrs; //hours input
   const qSubHour = (qSubArea / hoursPerIrrg).toFixed(2);
   const subIrrgHour = irr; // subs Irrigated per hour
-  const qPump = Number(qSubHour * subIrrgHour + Number(palmQ / hrs)).toFixed(2); // n of rows
+  const qPump = Number(
+    qSubHour * subIrrgHour + Number(palmQ / hrs) + Number(gasQ / hrs)
+  ).toFixed(2); // n of rows
   const z = nOfSubs / subIrrgHour;
   const nOfWorkingHours = Number((hoursPerIrrg * z).toFixed(2));
   const qPerRow = Number((treesPerRow * q) / (1000 * 60 * 60 * hrs)).toFixed(7);
