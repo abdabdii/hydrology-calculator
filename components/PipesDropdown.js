@@ -35,7 +35,12 @@ export default function PipesDropdown ({ q, length, header }) {
                 >
                     {pipes.map((pipe) => (
                         <MenuItem key={`${pipe.SKU}-select-${pipe.internalD}`} value={pipe.internalD}>
-                            <div style={{marginRight: "50px"}}>{(pipe.internalD*25.4).toFixed(2)}  </div>  {pipe.SKU}
+                            <div style={{display: "flex", flexDirection: "row"}}>
+                                <div style={{marginRight: "50px"}}>
+                                    {(pipe.internalD*25.4).toFixed(2)}
+                                </div>
+                                {pipe.SKU}
+                            </div>
                         </MenuItem>
                     ))}
                 </Select>
