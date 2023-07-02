@@ -5,12 +5,13 @@ import { FormGroup, InputAdornment, MenuItem, Select, Typography } from "@mui/ma
 import StartOutlinedIcon from "@mui/icons-material/StartOutlined";
 import { useState } from "react";
 
-
 export default function Inventory({ 
     qPerRow,
     nOfLinesPerSub,
     nOfSubs,
-    qCrop
+    qCrop,
+    qSubArea,
+    qPump
 }) {
     const [qSprinkler, setQSprinkler] = useState(0);
     const khartomLength = nOfLinesPerSub * nOfSubs;

@@ -7,8 +7,16 @@ import StatPreview from "./StatPreview";
 export default function PipesDropdown ({ q, length, header }) {
     const [diameter, setDiameter] = useState(0)
     const diameterMeter = (diameter*0.0254).toFixed(4)
-    const v = (( q ) / ( 0.78539816339 * (diameterMeter**2) )).toFixed(4)
-    const red =  (v > 2 || v < 1) ? 1 : 0
+    let v = (( q ) / ( 0.78539816339 * (diameterMeter**2) )).toFixed(4)
+    let red = 0
+    if (v === "Infinity") {
+        v = 0
+        red = 0
+    } else if (v > 2 || v < 1) {
+        red = 1
+    } else {
+        red = 0
+    }
 
     return (
         <div >

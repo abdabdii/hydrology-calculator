@@ -150,6 +150,8 @@ export default function PlanningResult({
           qPerRow={qPerRow}
           nOfSubs={nOfSubs}
           qCrop={q}
+          qSubArea={qSubArea}
+          qPump={qPump}
       />
     </div>
   );
