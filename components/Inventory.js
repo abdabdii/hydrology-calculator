@@ -18,7 +18,7 @@ export default function Inventory({
     const linesLength = 0;
     const subMainLength = 0;
     const MainLength = 0;
-    // const subsStopcock = nOfSubs
+    // const subsStopcock = nOfSubs  // محابس اللي داخله لكل حوشه بعدد الحوش
 
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -32,8 +32,8 @@ export default function Inventory({
                 <Divider />
                 <PipesDropdown header="Main" q={qPerRow}  length={khartomLength}/>
                 <Divider />
-                <div style={{marginBottom: "35px"}}>
-                    <h2>Sprinklers</h2>
+                <div style={{display: "flex", flexDirection: "row", gap: "120px", flexWrap: "wrap", marginTop: "35px", marginBottom: "35px"}}>
+                    <h2 style={{width: "120px"}}>Sprinklers</h2>
                     <TextField
                         id="water duty"
                         label="water duty"
@@ -53,7 +53,7 @@ export default function Inventory({
                             ),
                         }}
                         variant="outlined"
-                        style={{ marginRight: "16px", maxWidth: "300px" }}
+                        style={{ marginRight: "16px", maxWidth: "300px", marginTop: "10px" }}
                     />
                 </div>
                 <Divider />

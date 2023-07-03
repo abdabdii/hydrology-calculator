@@ -19,9 +19,9 @@ export default function PipesDropdown ({ q, length, header }) {
     }
 
     return (
-        <div >
-            <h2>{header}</h2>
-            <FormControl fullWidth>
+        <div style={{display: "flex", flexDirection: "row", gap: "120px", flexWrap: "wrap", marginTop: "30px", }}>
+            <h2 style={{width: "120px"}}>{header}</h2>
+            <FormControl style={{ marginTop: "10px"}}>
                 <InputLabel id="demo-simple-select-label1">Diameter</InputLabel>
                 <Select
                     labelId="demo-simple-select-labe1l"
@@ -45,10 +45,10 @@ export default function PipesDropdown ({ q, length, header }) {
                     ))}
                 </Select>
             </FormControl>
-            <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "50px" }}>
-                <StatPreview SelectedIcon={SpeedIcon} label="Speed" value= {`${v} m/s`} valueNum={red} />
-                <StatPreview SelectedIcon={SpeedIcon} label="Length" value={`${length} m`} />
-            </div>
+
+                <StatPreview SelectedIcon={SpeedIcon} label="Speed" value= {`${v} m/s`} valueNum={red} style={{marginBottom: "30px"}} />
+                <StatPreview SelectedIcon={SpeedIcon} label="Length" value={`${length} m`} style={{marginTop: "10px"}}/>
+
         </div>
     );
 }
