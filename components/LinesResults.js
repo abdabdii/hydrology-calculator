@@ -1,3 +1,22 @@
+
+
+Settings
+
+Hi! Here some our recommendations to get the best out of BLACKBOX:
+
+Be as clear as possible
+
+End the question in what language you want the answer to be, e.g: ‘connect to mongodb in python
+or you can just
+Watch tutorial video
+Here are some suggestion (choose one):
+Write a function that reads data from a json file
+How to delete docs from mongodb in phyton
+Connect to mongodb in nodejs
+Ask any coding question
+send
+refresh
+Blackbox AI Chat is in beta and Blackbox is not liable for the content generated. By using Blackbox, you acknowledge that you agree to agree to Blackbox's Terms and Privacy Policy
 import StatPreview from "./StatPreview";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
@@ -44,10 +63,23 @@ export default function LinesResults({ y, v, qPerRow, lines }) {
               let dLine = Number(
                 Math.sqrt(qLine / (0.78539816339 * v)) * (1000).toFixed(7)
               ).toFixed(2);
-              let newV = dLine / (0.78539816339 * (dLine / 1000) ** 2);
-              
+              var realD = AvailableDiameters.reduce(function (prev, curr) {
+                return Math.abs(curr - dLine) < Math.abs(prev - dLine)
+                  ? curr
+                  : prev;
+              });
+              let newV = qLine / (0.78539816339 * (realD / 1000) ** 2);
+              if (newV > 2) {
+                for (let i = 0; i < AvailableDiameters.length; i++) {
+                  if (dLine < AvailableDiameters[i]) {
+                    realD = AvailableDiameters[i];
+                    newV = qLine / (0.78539816339 * (realD / 1000) ** 2);
+                    break;
+                  }
+                }
+              }
               let headLoss = Number(
-                ((4 * 0.005 * line.length) / dLine) *
+                ((4 * 0.005 * line.length) / realD) *
                   (newV ** 2 / (2 * 9.81)) *
                   0.75 *
                   1000
@@ -63,7 +95,7 @@ export default function LinesResults({ y, v, qPerRow, lines }) {
                   <StatPreview
                     label={`Line#${line.index + 1} diameter`}
                     key={`${line.index}-diamater`}
-                    value={`${dLine} mm`}
+                    value={`${realD} mm`}
                     SelectedIcon={CircleOutlinedIcon}
                   />
                   <StatPreview
