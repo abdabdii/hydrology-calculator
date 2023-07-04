@@ -141,12 +141,7 @@ export default function PlanningResult({
       {lines && lines.length > 0 && (
         <LinesResults y={y} qPerRow={qPerRow} lines={lines} v={v} />
       )}
-      <h3 style={{ color: "#2196f3" }}>Block Dimensions</h3>
-      <OneBlock
-        rectwidth={widthOfSub}
-        rectheight={hightOfSub}
-        verticalspace={y}
-      />
+      
       <Divider />
       <Inventory
           nOfLinesPerSub={nOfLinesPerSub}
@@ -155,6 +150,21 @@ export default function PlanningResult({
           qCrop={q}
           qSubArea={qSubArea}
           qPump={qPump}
+          subHeight={hightOfSub}
+          length={width}
+          rows={rows}
+          qGas={gasQ}
+          qPalm={palmQ}
+          widthOfSub={widthOfSub}
+          nOfTrees={nOfTrees}
+          hrs={hrs}
+      />
+<Divider />
+<h3 style={{ color: "#2196f3" }}>Block Dimensions</h3>
+      <OneBlock
+        rectwidth={widthOfSub}
+        rectheight={hightOfSub}
+        verticalspace={y}
       />
     </div>
   );

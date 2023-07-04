@@ -5,10 +5,12 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { InputAdornment, TextField } from "@mui/material";
 import StatPreview from "./StatPreview";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import RemoveIcon from '@mui/icons-material/Remove';
 
-export default function PipesDropdown ({ q, length, header }) {
+export default function PipesDropdownLength ({ q, header }) {
     const [diameter, setDiameter] = useState('');
     const [price, setPrice] = useState('')
+    const [length, setLength] = useState(0)
     const diameterMeter = (Number(diameter.split('/')[0])*.0254).toFixed(4)
     let v = (( q ) / ( 0.78539816339 * (diameterMeter**2) )).toFixed(4)
     let red = 0
@@ -68,8 +70,27 @@ export default function PipesDropdown ({ q, length, header }) {
                 variant="outlined"
                 style={{ marginRight: "16px",marginTop:"10px", maxWidth: "300px" }}
             />
+            <TextField
+                id={`${header}-length-input`}
+                label="Total Length (m)"
+                value={length}
+                onFocus={(event) => {
+                event.target.select();
+                }}
+                onChange={(event) => {
+                setLength(event.target.value);
+                }}
+                InputProps={{
+                startAdornment: (
+                    <InputAdornment position="start">
+                    <RemoveIcon/>
+                    </InputAdornment>
+                ),
+                }}
+                variant="outlined"
+                style={{ marginRight: "16px",marginTop:"10px", maxWidth: "300px" }}
+            />
 
-                <StatPreview SelectedIcon={SpeedIcon} label="Length" value={`${length} m`} style={{marginTop: "10px"}}/>
                 <StatPreview SelectedIcon={SpeedIcon} label="Speed" value= {`${v} m/s`} valueNum={red} style={{marginBottom: "30px"}} />
 
                 {price * length > 0  && diameter&&<StatPreview SelectedIcon={AttachMoneyIcon} label="Total cost" value={`${Number(price * length).toFixed(2)} $`} style={{marginTop: "10px"}}/>}

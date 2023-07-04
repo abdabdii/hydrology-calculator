@@ -1,16 +1,28 @@
 import PipesDropdown from "./PipesDropdown";
+import PipesDropdownLength from "./PipesDropdownLength";
 import { Divider } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { FormGroup, InputAdornment, MenuItem, Select, Typography } from "@mui/material";
+import StatPreview from "./StatPreview";
+import ShowerIcon from '@mui/icons-material/Shower';
 import StartOutlinedIcon from "@mui/icons-material/StartOutlined";
+import ForestIcon from '@mui/icons-material/Forest';
 import { useState } from "react";
 
 export default function Inventory({ 
     qPerRow,
     nOfLinesPerSub,
     nOfSubs,
+    rows,
+    subHeight,
+    length,
     qCrop,
     qSubArea,
+    widthOfSub,
+    nOfTrees,
+    qGas,
+    qPalm,
+    hrs,
     qPump
 }) {
     const [qSprinkler, setQSprinkler] = useState(0);
@@ -19,20 +31,17 @@ export default function Inventory({
     const subMainLength = 0;
     const MainLength = 0;
     // const subsStopcock = nOfSubs  // محابس اللي داخله لكل حوشه بعدد الحوش
-
+    console.log(qPump);
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
             <h2 style={{ marginBottom: "32px" }}>Inventory</h2>
             <div>
-                <PipesDropdown header="Hose" q={qPerRow}  length={khartomLength}/>
-                <Divider />
-                <PipesDropdown header="Lines" q={qPerRow}  length={khartomLength}/>
-                <Divider />
-                <PipesDropdown header="Sub Main" q={qPerRow}  length={khartomLength}/>
-                <Divider />
-                <PipesDropdown header="Main" q={qPerRow}  length={khartomLength}/>
-                <Divider />
-                <div style={{display: "flex", flexDirection: "row", gap: "120px", flexWrap: "wrap", marginTop: "35px", marginBottom: "35px"}}>
+                <PipesDropdown header="Hose" q={qPerRow }  length={nOfLinesPerSub * nOfSubs * widthOfSub}/>
+                <PipesDropdownLength header="Sub Main" q={(qPump / (60*60))} />
+                { qPalm > 0 &&<><PipesDropdownLength header="Palm trees" q={(Number(qPalm / hrs).toFixed(2))/3600 } /></>}
+                { qGas > 0 &&<><PipesDropdownLength header="Gasoline" q={(Number(qGas / hrs).toFixed(2))/3600} /></>}
+                <PipesDropdownLength header="Main" q={qPump / (60*60)} />
+                <div style={{display: "flex", flexDirection: "row", gap: "20px", flexWrap: "wrap", marginTop: "35px", marginBottom: "35px"}}>
                     <h2 style={{width: "120px"}}>Sprinklers</h2>
                     <TextField
                         id="water duty"
@@ -55,11 +64,16 @@ export default function Inventory({
                         variant="outlined"
                         style={{ marginRight: "16px", maxWidth: "300px", marginTop: "10px" }}
                     />
-                </div>
-                <Divider />
-                <div>
-                    <h2>Stopcock for subs</h2>
-                    {nOfSubs}
+                   {qSprinkler && qSprinkler > 0 ? <><StatPreview
+            label="Number of sprinklers / tree"
+            value={`${Math.ceil(Number(qCrop / qSprinkler))} sprinkler/tree`}
+            SelectedIcon={ForestIcon}
+          />
+          <StatPreview
+            label="Approx total number of sprinklers"
+            value={`${Math.ceil(Number(qCrop / qSprinkler)) * nOfTrees * nOfSubs} sprinkler`}
+            SelectedIcon={ShowerIcon}
+          /></>: ""}
                 </div>
             </div>
         </div>

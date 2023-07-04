@@ -44,23 +44,10 @@ export default function LinesResults({ y, v, qPerRow, lines }) {
               let dLine = Number(
                 Math.sqrt(qLine / (0.78539816339 * v)) * (1000).toFixed(7)
               ).toFixed(2);
-              var realD = AvailableDiameters.reduce(function (prev, curr) {
-                return Math.abs(curr - dLine) < Math.abs(prev - dLine)
-                  ? curr
-                  : prev;
-              });
-              let newV = qLine / (0.78539816339 * (realD / 1000) ** 2);
-              if (newV > 2) {
-                for (let i = 0; i < AvailableDiameters.length; i++) {
-                  if (dLine < AvailableDiameters[i]) {
-                    realD = AvailableDiameters[i];
-                    newV = qLine / (0.78539816339 * (realD / 1000) ** 2);
-                    break;
-                  }
-                }
-              }
+              let newV = dLine / (0.78539816339 * (dLine / 1000) ** 2);
+              
               let headLoss = Number(
-                ((4 * 0.005 * line.length) / realD) *
+                ((4 * 0.005 * line.length) / dLine) *
                   (newV ** 2 / (2 * 9.81)) *
                   0.75 *
                   1000
@@ -76,7 +63,7 @@ export default function LinesResults({ y, v, qPerRow, lines }) {
                   <StatPreview
                     label={`Line#${line.index + 1} diameter`}
                     key={`${line.index}-diamater`}
-                    value={`${realD} mm`}
+                    value={`${dLine} mm`}
                     SelectedIcon={CircleOutlinedIcon}
                   />
                   <StatPreview

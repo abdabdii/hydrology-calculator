@@ -10,14 +10,15 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
-import DropdownSection from "./DropdownSection";
-import InputBoxes from "./InputBoxes";
+import DropdownSection from "../DropdownSection";
+import InputBoxes from "../InputBoxes";
 import ParkOutlinedIcon from "@mui/icons-material/ParkOutlined";
-import StatPreview from "./StatPreview";
+import StatPreview from "../StatPreview";
 import ForestIcon from "@mui/icons-material/Forest";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import { Divider } from "@mui/material";
+import WaterDropOutlinedIcon from "@mui/icons-material/WaterDropOutlined";
 
 const style = {
   display: "grid",
@@ -48,11 +49,20 @@ export default function Crop({
   setGasQ,
   gasLength,
   setGasLength,
+  design,
+  setDesign,
+  qMax,
+  setQMax,
   hrs,
 }) {
   const [custom, setCustom] = useState("exist");
+  
   const handleChange = (event) => {
     setCustom(event.target.value);
+  };
+
+  const handleDesign = (event) => {
+    setDesign(event.target.value);
   };
 
   useEffect(() => {
@@ -66,6 +76,29 @@ export default function Crop({
   return (
 <div>
   <h2>Crop details</h2>
+      <FormControl style={{ marginBottom: "16px" }}>
+          <FormLabel id="demo-radio-buttons-group-label-type1">
+            Design Method By
+          </FormLabel>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label-type1"
+            defaultValue="exist"
+            name="radio-buttons-group1"
+            value={design}
+            onChange={handleDesign}
+          >
+            <FormControlLabel
+              value="crop"
+              control={<Radio />}
+              label="Dimensions"
+            />
+            <FormControlLabel
+              value="flow"
+              control={<Radio />}
+              label="Max Flow"
+            />
+          </RadioGroup>
+        </FormControl>
   <div
     style={{
       display: "grid",
@@ -99,6 +132,7 @@ export default function Crop({
           />
         </RadioGroup>
       </FormControl>
+      
 
       {/* Crop details */}
       {custom == "exist" ? (
@@ -112,7 +146,31 @@ export default function Crop({
       ) : (
         <InputBoxes x={x} setX={setX} y={y} setY={setY} q={q} setQ={setQ} />
       )}
-    </div>
+      {design == "flow" &&
+      <TextField
+      id="flow-design"
+      label="Max allowed Q (m³ /fed/day)"
+      value={qMax}
+      onFocus={(event) => {
+        event.target.select();
+      }}
+      onChange={(event) => {
+        setQMax(event.target.value);
+      }}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <WaterDropOutlinedIcon />
+          </InputAdornment>
+        ),
+      }}
+      variant="outlined"
+      style={{ marginTop: "16px", maxWidth: "300px" }}
+    />}
+      
+    </div> 
+    
+    
 
     {/* PALM */}
     <div>
