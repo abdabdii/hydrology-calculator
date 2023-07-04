@@ -1,6 +1,8 @@
 "use client";
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 const inter = Inter({ subsets: ["latin"] });
 
 import * as React from 'react';
@@ -22,6 +24,8 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import AppRegistrationOutlinedIcon from "@mui/icons-material/AppRegistrationOutlined";
+import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined';
+import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
 
 const drawerWidth = 240;
 
@@ -92,6 +96,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -101,7 +106,7 @@ export default function RootLayout({ children }) {
     setOpen(false);
   };
 
-  const pathname = usePathname();
+
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
@@ -122,7 +127,7 @@ export default function RootLayout({ children }) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-              {pathname.slice(1).toUpperCase()}
+              {pathname.slice(1).toUpperCase()} IRRIGATION
             </Typography>
           </Toolbar>
         </AppBar>
@@ -135,8 +140,7 @@ export default function RootLayout({ children }) {
           <Divider />
 
           <List >
-              <ListItem disablePadding sx={{ display: 'block' }}                   
-               >
+              <Link href="/drip " style={{color: "black", textDecoration: "none"}} >
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -151,11 +155,35 @@ export default function RootLayout({ children }) {
                       justifyContent: 'center',
                     }}
                   >
-                    <AppRegistrationOutlinedIcon />
+                    <WaterDropOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText primary="planning" sx={{ opacity: open ? 1 : 0 }} />
+                  <ListItemText  
+                    primary="Drip irrigation " 
+                    sx={{ opacity: open ? 1 : 0 }} 
+        
+                  />
                 </ListItemButton>
-              </ListItem>
+              </Link>
+              <Link href="/pivot" style={{color: "black", textDecoration: "none"}}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <TrackChangesOutlinedIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Pivot irrigation" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </Link>
           </List>
 
           </Drawer>

@@ -42,7 +42,7 @@ export default function Inventory({
                 { qGas > 0 &&<><PipesDropdownLength header="Gasoline" q={(Number(qGas / hrs).toFixed(2))/3600} /></>}
                 <PipesDropdownLength header="Main" q={qPump / (60*60)} />
                 <div style={{display: "flex", flexDirection: "row", gap: "20px", flexWrap: "wrap", marginTop: "35px", marginBottom: "35px"}}>
-                    <h2 style={{width: "120px"}}>Sprinklers</h2>
+                    <h2 style={{width: "120px"}}>Emitters</h2>
                     <TextField
                         id="water duty"
                         label="water duty"
