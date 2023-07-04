@@ -53,9 +53,12 @@ export default function PlanningResult({
   const totalCircles = nOfCirclesX * nOfCirclesY;
   const requiredWaterPerCircle =  (nOfTrees * (q*.001) ) / hrs 
   const quantityCultivatedPerIrr = Number(requiredWaterPerCircle * irr).toFixed(3);
+  console.log(palmQ);
+  console.log(quantityCultivatedPerIrr);
+  console.log(quantityCultivatedPerIrr + Number(palmQ / hrs) + Number(gasQ / hrs));
 
   const qPump = Number(
-    quantityCultivatedPerIrr + Number(palmQ / hrs) + Number(gasQ / hrs)
+    Number(quantityCultivatedPerIrr) + Number(palmQ / hrs) + Number(gasQ / hrs)
   ).toFixed(2); // n of rows
   const z = totalCircles / irr;
   const nOfWorkingHours = Number((hrs * z).toFixed(2));
