@@ -65,13 +65,13 @@ export default function Inventory({
                         style={{ marginRight: "16px", maxWidth: "300px", marginTop: "10px" }}
                     />
                    {qSprinkler && qSprinkler > 0 ? <><StatPreview
-            label="Number of sprinklers / tree"
-            value={`${Math.ceil(Number(qCrop / qSprinkler))} sprinkler/tree`}
+            label="Number of emmiter / tree"
+            value={`${Math.ceil(Number(qCrop / qSprinkler))} emitter/tree`}
             SelectedIcon={ForestIcon}
           />
           <StatPreview
-            label="Approx total number of sprinklers"
-            value={`${Math.ceil(Number(qCrop / qSprinkler)) * nOfTrees * nOfSubs} sprinkler`}
+            label="Approx total number of emmiter"
+            value={`${Math.ceil(Number(qCrop / qSprinkler)) * nOfTrees * nOfSubs} emmiter`}
             SelectedIcon={ShowerIcon}
           /></>: ""}
                 </div>
