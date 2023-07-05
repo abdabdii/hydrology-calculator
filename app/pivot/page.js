@@ -101,7 +101,7 @@ export default function Planning() {
         setWindDir={setWindDir}
       />
       <Divider />
-      {x && y && allowed && width && height && q ? (
+      {x && y  && width && height && q ? (
         <PlanningResult
           width={width}
           height={height}
