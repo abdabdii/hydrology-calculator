@@ -51,19 +51,28 @@ export default function PlanningResult({
   const nOfCirclesX = Math.floor(width / diameter);
   const nOfCirclesY = Math.floor(height / diameter);
   const totalCircles = nOfCirclesX * nOfCirclesY;
+  const circlesPerDay = (totalCircles / irr);
+  const nOfTurns = hrs / circlesPerDay
+  const hoursPerTurn = hrs / nOfTurns
+
+
   const requiredWaterPerCircle =  (nOfTrees * (q*.001) ) / hrs 
-  const quantityCultivatedPerIrr = Number(requiredWaterPerCircle * irr).toFixed(3);
-  console.log(palmQ);
+  const quantityCultivatedPerIrr = Number(qMax * circleArea * irr).toFixed(3);
+
   console.log(quantityCultivatedPerIrr);
   console.log(quantityCultivatedPerIrr + Number(palmQ / hrs) + Number(gasQ / hrs));
+  
 
   const qPump = Number(
     Number(quantityCultivatedPerIrr) + Number(palmQ / hrs) + Number(gasQ / hrs)
   ).toFixed(2); // n of rows
   const z = totalCircles / irr;
+  const qPivotSec = Number((quantityCultivatedPerIrr / hoursPerTurn) / 3600).toFixed(4)
+  console.log(qPivotSec);
   const nOfWorkingHours = Number((hrs * z).toFixed(2));
+  
   const mainLineDiameter = Number(
-    Math.sqrt(qPump / (0.78539816339 * v * 60 * 60)) * 1000
+    Math.sqrt(((4*qPivotSec ) + Number(palmQ / (hoursPerTurn*3600)) + Number(gasQ / (hoursPerTurn*3600)))  / (0.78539816339 * v )) * 1000
   ).toFixed(2);
 
 
@@ -84,26 +93,24 @@ export default function PlanningResult({
             SelectedIcon={CircleOutlinedIcon}
           />
           <StatPreview
-            label="Q per Pivot"
-            value={`${Number(requiredWaterPerCircle).toFixed(5)} m³/hr`}
+            label="No of turns"
+            value={`${nOfTurns} turn`}
             SelectedIcon={WaterDropIcon}
           />
           <StatPreview
-            label="Number of trees per Pivot"
-            value={`${nOfTrees} Tree`}
-            SelectedIcon={ForestIcon}
+            label="Pivots per day"
+            value={`${circlesPerDay} Pivot`}
+            SelectedIcon={CircleOutlinedIcon}
           />
           <StatPreview
-            label="Q pump"
-            value={`${qPump} m³/hr`}
+            label="Q per Pivot"
+            value={`${Number(quantityCultivatedPerIrr / hoursPerTurn).toFixed(2)} m³/day`}
+            SelectedIcon={WaterDropIcon}
+          />
+          <StatPreview
+            label="Q Pivot"
+            value={`${quantityCultivatedPerIrr} m³/day`}
             SelectedIcon={HeatPumpIcon}
-          />
-          <StatPreview
-            label="Number of working hours"
-            value={`${nOfWorkingHours} hr`}
-            SelectedIcon={QueryBuilderIcon}
-            limitedValue={18}
-            valueNum={nOfWorkingHours}
           />
         </div>
       </div>    

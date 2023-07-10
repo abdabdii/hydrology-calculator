@@ -76,29 +76,6 @@ export default function Crop({
   return (
 <div>
   <h2>Crop details</h2>
-      <FormControl style={{ marginBottom: "16px" }}>
-          <FormLabel id="demo-radio-buttons-group-label-type1">
-            Design Method By
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label-type1"
-            defaultValue="exist"
-            name="radio-buttons-group1"
-            value={design}
-            onChange={handleDesign}
-          >
-            <FormControlLabel
-              value="crop"
-              control={<Radio />}
-              label="Dimensions"
-            />
-            <FormControlLabel
-              value="flow"
-              control={<Radio />}
-              label="Max Flow"
-            />
-          </RadioGroup>
-        </FormControl>
   <div
     style={{
       display: "grid",
@@ -109,44 +86,6 @@ export default function Crop({
     {/* CROP */}
     <div style={{ border: "10px", padding: "10px" }}>
       {/* Exit or Costom */}
-      <FormControl style={{ marginBottom: "16px" }}>
-        <FormLabel id="demo-radio-buttons-group-label">
-          Exist or custom
-        </FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="exist"
-          name="radio-buttons-group"
-          value={custom}
-          onChange={handleChange}
-        >
-          <FormControlLabel
-            value="exist"
-            control={<Radio />}
-            label="Exist"
-          />
-          <FormControlLabel
-            value="custom"
-            control={<Radio />}
-            label="Custom"
-          />
-        </RadioGroup>
-      </FormControl>
-      
-
-      {/* Crop details */}
-      {custom == "exist" ? (
-        <DropdownSection
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          setQ={setQ}
-          setX={setX}
-          setY={setY}
-        />
-      ) : (
-        <InputBoxes x={x} setX={setX} y={y} setY={setY} q={q} setQ={setQ} />
-      )}
-      {design == "flow" &&
       <TextField
       id="flow-design"
       label="Max allowed Q (m³ /fed/day)"
@@ -166,7 +105,7 @@ export default function Crop({
       }}
       variant="outlined"
       style={{ marginTop: "16px", maxWidth: "300px" }}
-    />}
+    />
       
     </div> 
     

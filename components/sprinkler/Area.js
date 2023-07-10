@@ -145,7 +145,7 @@ export default function Area({
       >
         <TextField
           id="hours"
-          label="Hours for one Irrigation"
+          label="Working hours per day"
           type="number"
           value={hrs}
           onFocus={(event) => {
@@ -166,7 +166,7 @@ export default function Area({
         />
         <TextField
           id="irrginput"
-          label="Number Of Circles Irrigated in paraller"
+          label="Days to irrigate all pivots"
           type="number"
           value={irrg}
           onFocus={(event) => {
