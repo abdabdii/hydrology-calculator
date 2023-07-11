@@ -21,6 +21,7 @@ export default function Planning() {
   const [diameter, setDiameter] = useState(220);
   const [irrg, setIrrg] = useState(2);
   const [palmLength, setPalmLength] = useState(0);
+  const [turns, setTurns] = useState(2);
   const [palm, setPalm] = useState(false);
   const [palmQ, setPalmQ] = useState(0);
   const [lines, setLines] = useState([]);
@@ -99,6 +100,8 @@ export default function Planning() {
         setMainRoad={setMainRoad}
         windDir={windDir}
         setWindDir={setWindDir}
+        turns={turns}
+        setTurns={setTurns}
       />
       <Divider />
       { width && height && qMax ? (
@@ -123,6 +126,7 @@ export default function Planning() {
           design={design}
           diameter={diameter}
           setDiameter={setDiameter}
+          nOfTurns={turns}
         />
       ) : (
         ""

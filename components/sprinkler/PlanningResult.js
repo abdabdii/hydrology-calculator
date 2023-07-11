@@ -39,7 +39,8 @@ export default function PlanningResult({
   setDiameter,
   qMax,
   windDir,
-  design
+  design,
+  nOfTurns
 }) {
 
   const circleArea = Number((0.78539816339 * (diameter**2)) / 4200).toFixed(3);
@@ -49,7 +50,6 @@ export default function PlanningResult({
   const nOfCirclesY = Math.floor(height / diameter);
   const totalCircles = nOfCirclesX * nOfCirclesY;
   const circlesPerDay = (totalCircles / irr);
-  const nOfTurns = hrs / circlesPerDay
   const hoursPerTurn = hrs / nOfTurns
 
 
@@ -110,13 +110,13 @@ export default function PlanningResult({
             SelectedIcon={HeatPumpIcon}
           />
           <StatPreview
-            label="Emitters for pivot"
-            value={`${Math.ceil(diameter / 2.75)} Emmiter/Pivot`}
+            label="Sprinklers for pivot"
+            value={`${Math.ceil(diameter / 2.75)} Sprinklers/Pivot`}
             SelectedIcon={ShowerIcon}
           />
           <StatPreview
-            label="Total Emmiters"
-            value={`${Math.ceil((diameter / 2.75) * totalCircles)} Emmiters`}
+            label="Total Sprinklers"
+            value={`${Math.ceil((diameter / 2.75) * totalCircles)} Sprinklers`}
             SelectedIcon={ShowerIcon}
           />
         </div>

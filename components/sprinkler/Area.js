@@ -47,6 +47,8 @@ export default function Area({
   setMainRoad,
   windDir,
   setWindDir,
+  setTurns,
+  turns
 }) {
   const handleChange = (event) => {
     setWindDir(event.target.value);
@@ -174,6 +176,27 @@ export default function Area({
           }}
           onChange={(event) => {
             setIrrg(event.target.value);
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <LooksOneOutlinedIcon />
+              </InputAdornment>
+            ),
+          }}
+          variant="outlined"
+          style={{ marginRight: "16px", maxWidth: "300px" }}
+        />
+        <TextField
+          id="turns"
+          label="Number of turns"
+          type="number"
+          value={turns}
+          onFocus={(event) => {
+            event.target.select();
+          }}
+          onChange={(event) => {
+            setTurns(event.target.value);
           }}
           InputProps={{
             startAdornment: (
