@@ -6,6 +6,7 @@ import { InputAdornment, TextField } from "@mui/material";
 import StatPreview from "./StatPreview";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
+pipes.sort((a, b) => a.internalD - b.internalD);
 export default function PipesDropdown ({ q, length, header }) {
     const [diameter, setDiameter] = useState('');
     const [price, setPrice] = useState('')
@@ -33,11 +34,12 @@ export default function PipesDropdown ({ q, length, header }) {
                     style={{ width: "300px" }}
                     onChange={(event) => {
                      setDiameter(event.target.value);
+                     setPrice((Number(event.target.value.split('/')[2])*3.28084).toFixed(2))
                     }}
                     label="Diameter"
                 >
                     {pipes.map((pipe) => (
-                        <MenuItem key={`${pipe.SKU}-select-${pipe.internalD}-${header}`} value={`${pipe.internalD}/${pipe.SKU}`}>
+                        <MenuItem key={`${pipe.SKU}-select-${pipe.internalD}-${header}`} value={`${pipe.internalD}/${pipe.SKU}/${pipe.price}`}>
                             <div style={{display: "flex", flexDirection: "row"}}>
                                 <div style={{marginRight: "50px"}}>
                                     {`${(pipe.internalD*25.4).toFixed(2)}mm`}

@@ -6,10 +6,7 @@ import WaterDropIcon from "@mui/icons-material/WaterDrop";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import HeatPumpIcon from "@mui/icons-material/HeatPump";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
-import DensitySmallIcon from "@mui/icons-material/DensitySmall";
-import GrassIcon from "@mui/icons-material/Grass";
-import Inventory from "@/components/Inventory";
-import { Divider } from "@mui/material";
+import ShowerIcon from '@mui/icons-material/Shower';
 
 
 const style = {
@@ -111,6 +108,16 @@ export default function PlanningResult({
             label="Q Pivot"
             value={`${quantityCultivatedPerIrr} m³/day`}
             SelectedIcon={HeatPumpIcon}
+          />
+          <StatPreview
+            label="Emitters for pivot"
+            value={`${Math.ceil(diameter / 2.75)} Emmiter/Pivot`}
+            SelectedIcon={ShowerIcon}
+          />
+          <StatPreview
+            label="Total Emmiters"
+            value={`${Math.ceil((diameter / 2.75) * totalCircles)} Emmiters`}
+            SelectedIcon={ShowerIcon}
           />
         </div>
       </div>    
