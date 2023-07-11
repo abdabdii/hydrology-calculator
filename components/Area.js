@@ -262,7 +262,7 @@ export default function Area({
           }}
         >
           {lines.map((line) => (
-            <div key={`${line.index}-line-div`}>
+            <div key={`${line.index}-line-div`} style={{order:line.index + 1}}>
               <TextField
                 id={`${line.index + 6}-line-boxq`}
                 key={`${line.index + 6}-line-box`}

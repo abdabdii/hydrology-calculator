@@ -59,7 +59,7 @@ export default function LinesResults({ y, v, qPerRow, lines }) {
                     SelectedIcon={CircleOutlinedIcon}
                   />
                   <StatPreview
-                    label={`Line#${line.index + 1} New V`}
+                    label={`Line#${line.index + 1} V`}
                     key={`${line.index}-v`}
                     value={`${Number(newV).toFixed(2)} m/s`}
                     SelectedIcon={SpeedOutlinedIcon}
