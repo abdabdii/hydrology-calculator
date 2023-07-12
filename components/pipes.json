@@ -1,5 +1,15 @@
 [
   {
+    "SKU": 2017450038,
+    "internalD": 14.5,
+    "price": 245.01
+  },
+  {
+    "SKU": 2670124,
+    "internalD": 3.54,
+    "price": 2.62
+  },
+  {
     "SKU": 1012020906,
     "internalD": 0.57,
     "price": 1.75

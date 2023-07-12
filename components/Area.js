@@ -10,8 +10,24 @@ import LooksOneOutlinedIcon from "@mui/icons-material/LooksOneOutlined";
 import WidthWideOutlinedIcon from "@mui/icons-material/WidthWideOutlined";
 import StatPreview from "./StatPreview";
 import { CustomSlider } from "./CustomSlider";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
 import { useEffect } from "react";
+import Image from 'next/image'
+import instructions from "../public/instructions.png"
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 import {
   FormControl,
   FormControlLabel,
@@ -47,6 +63,9 @@ export default function Area({
   windDir,
   setWindDir,
 }) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const handleChange = (event) => {
     setWindDir(event.target.value);
   };
@@ -58,7 +77,24 @@ export default function Area({
 
   return (
     <>
-      <h2 style={{ marginBottom: "32px" }}>Data input</h2>
+      <h2 style={{ marginBottom: "32px" }}>Data input <div>
+      <Button style={{fontWeight:"bold"}} variant="outlined" onClick={handleOpen}>See inputs explaination</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+        <Image
+      src={instructions}
+      alt="Picture of the author"
+      width="450"
+    />
+        </Box>
+      </Modal>
+    </div></h2>
+      
       <div
         style={{
           display: "flex",

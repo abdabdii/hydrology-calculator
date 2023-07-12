@@ -45,7 +45,7 @@ export default function Inventory({
                     <h2 style={{width: "120px"}}>Emitters</h2>
                     <TextField
                         id="water duty"
-                        label="water duty"
+                        label="water duty (m³/day)"
                         type="number"
                         value={qSprinkler}
                         onFocus={(event) => {
