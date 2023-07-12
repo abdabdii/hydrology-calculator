@@ -45,7 +45,7 @@ export default function LinesResults({ y, v, qPerRow, lines }) {
               ).toFixed(2);
               let newV = qLine / (0.78539816339 * (dLine / 1000) ** 2);
               return (
-                <div>
+                <div key={`${line.index}-line-div`}>
                   <StatPreview
                     label={`Line#${line.index + 1} Q`}
                     key={`${line.index}-flow`}
