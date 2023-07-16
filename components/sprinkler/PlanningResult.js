@@ -100,8 +100,8 @@ export default function PlanningResult({
             SelectedIcon={CircleOutlinedIcon}
           />
           <StatPreview
-            label="Q per Pivot"
-            value={`${Number(quantityCultivatedPerIrr / hoursPerTurn).toFixed(2)} m³/day`}
+            label="Q per Pivot hourly"
+            value={`${Number(quantityCultivatedPerIrr / hoursPerTurn).toFixed(2)} m³/hr`}
             SelectedIcon={WaterDropIcon}
           />
           <StatPreview
